@@ -3,23 +3,24 @@ import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodoActions from './actions';
-/*import TodoList from './todoList';*/
-/*import TodoInput from './todoInput';*/
-
-//components
-//import AddTodo from './components/AddTodo';
-//import List from './components/List';
+import TaskGroup from './Components/TaskGroup';
+import SearchTask from './Components/SearchTask';
+import AddButton from './Components/AddButton';
 
 class App extends Component {
     render() {
-        //const { todos, actions } = this.props;
-        //console.log("stoire", todos[0]);
-        //let notes = [];
-        //for (var i = 0; i < todos.length; i++) {
-        //    notes.push(<List key={todos[i].id} list={todos[i]}></List>);
-        //}
+        const { taskGroupArray } = this.props;
+        
         return <div>
-            <h1 className="title">Tada ToDo</h1>
+            <h1>Tada ToDo</h1>
+            <SearchTask/>
+            <div>
+                taskGroupArray.map( (taskGroup, index) => (
+                    <TaskGroup/>                   
+                    )
+                );
+            </div>
+            <AddButton/>
         </div>
     }
 }
