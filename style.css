@@ -98,6 +98,18 @@ li{
     box-shadow: 0 0 6px rgba(128, 117, 117, 0.4);
     position: relative;
     transition:all 0.23s ease-in;
+    animation:entrGrp 0.233s ease-in-out;
+}
+
+@keyframes entrGrp{
+    from{
+        opacity:0.3;
+        transform:translateX(-50px);
+    } to{
+        opacity:1;
+        transform:translateX(0px);
+
+    }
 }
 .to-do__task-group.active, .to-do__task-group:hover{
     box-shadow: 0 0 14px rgb(128, 117, 117);
