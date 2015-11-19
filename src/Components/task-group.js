@@ -6,7 +6,8 @@ export default class TaskGroup extends React.Component {
     }
 
     render() {
-        let { title, list} = this.props.data, completeness = 0;
+        let { title, list} = this.props.data, completeness;
+
         let listElements = list.map(
             (listItem, index) => (
                 <li key={listItem.id} className="to-do__task-group__task-list__item clearfix">
@@ -19,24 +20,24 @@ export default class TaskGroup extends React.Component {
                     </div>
                 </li>
             ));
-        let sum;
-        completeness = list.reduce((sum = 0, listItem) => {
+
+        completeness = Math.round(list.reduce((sum = 0, listItem) => {
             console.log(listItem, sum);
             if (listItem.done) return sum+=1;
             else return sum;
-        }, 0);
-        console.log("completeness", completeness, sum);
+        }, 0)/list.length * 100);
+
         return <div className="to-do__task-group active fleft">
             <div className="to-do__task-group__close">
                 <div className="to-do__task-group__close__ico">+</div>
             </div>
             <div className="to-do__task-group__header">
                 <span className="bold-text">{title}</span>
-                <span className="to-do__task-group__header__perc">(78%)</span>
+                <span className="to-do__task-group__header__perc">({completeness}%)</span>
                 <input type="text" className="to-do-default-text-box"/>
             </div>
             <div className="to-do__task-group__progress-bar">
-                <div className="to-do__task-group__progress-bar--perc-completed"></div>
+                <div className="to-do__task-group__progress-bar--perc-completed" style={{width: completeness + '%'}}></div>
             </div>
             <div className="to-do__task-group__task-list-wrapper">
                 <ul className="to-do__task-group__task-list">
