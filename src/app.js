@@ -10,9 +10,9 @@ import AddButton from './components/add-button';
 class App extends Component {
     render() {
         console.log("app props", this.props);
-        let {store, actions} = this.props;
-        let {taskGroups, searchText} = store;
-        taskGroups = this.props.store.taskGroups.map(
+        let {data, actions} = this.props;
+        let {taskGroups, searchText} = data;
+        let taskGroupElements = taskGroups.map(
             (taskGroup, index) => (
                 <TaskGroup key={taskGroup.id}
                            filterBy={searchText}
@@ -27,7 +27,7 @@ class App extends Component {
             <h1 className="fleft">Tada ToDo</h1>
             <SearchTask onSearch={actions.searchTask}/>
             <div className="to-do__task-group-wrapper clearall clearfix">
-                {taskGroups}
+                {taskGroupElements}
                 <AddButton handleClick={actions.createTaskGroup}/>
             </div>
         </div>
@@ -35,7 +35,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-    return {store: state};
+    return {data: state};
 }
 
 function mapDispatchToProps(dispatch) {

@@ -34,17 +34,23 @@ export function rootReducer(state = initialState, action) {
     switch (action.type) {
 
         case 'CREATE_TASKGROUP':
-            return [
-                ...state,
-                {
-                    id: state.reduce((maxId, taskGroup) => Math.max(taskGroup.id, maxId), -1) + 1,
-                    title: 'New Task Group',
-                    list: []
-                }
-            ];
+            return {
+                taskGroups: [
+                    ...state.taskGroups,
+                    {
+                        id: state.taskGroups.reduce((maxId, taskGroup) => Math.max(taskGroup.id, maxId), -1) + 1,
+                        title: 'New Task Group',
+                        list: []
+                    }
+                ],
+                searchText: ""
+            };
 
         case 'REMOVE_TASKGROUP':
-            return state.filter(taskGroup => taskGroup.id !== action.taskGroupId);
+            return {
+                taskGroups: [state.taskGroups.filter(taskGroup => taskGroup.id !== action.taskGroupId)],
+                searchText: ""
+            };
 
         case 'ADD_TITLE':
             return state;
@@ -57,7 +63,7 @@ export function rootReducer(state = initialState, action) {
                 console.log(item.id, action.listItemId);
                 return item.id !== action.listItemId;
             });
-            
+
             return {
                 taskGroups: taskGroups,
                 searchText: ""
@@ -74,10 +80,10 @@ export function rootReducer(state = initialState, action) {
             return state;
 
         case 'SEARCH_TASK':
-        	return {
-        		taskGroups: state.taskGroups,
-        		searchText: action.text
-        	};
+            return {
+                taskGroups: state.taskGroups,
+                searchText: action.text
+            };
 
         default:
             return state;
