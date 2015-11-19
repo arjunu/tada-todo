@@ -18,7 +18,8 @@ export default class TaskGroup extends React.Component {
     render() {
         let { title, list, id} = this.props.data, completeness;
 
-        let listElements = list.filter(listItem => listItem.name.toLowerCase().indexOf(this.props.filterBy) > -1)
+        let listElements = list
+            .filter(listItem => listItem.name.toLowerCase().indexOf(this.props.filterBy) > -1)
             .map(
             (listItem, index) => (
                 <li key={listItem.id}

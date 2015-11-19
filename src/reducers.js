@@ -47,8 +47,10 @@ export function rootReducer(state = initialState, action) {
             return state.filter(taskGroup => taskGroup.id !== action.taskGroupId);
 
         case 'ADD_TITLE':
+            return state;
 
         case 'ADD_LISTITEM':
+            return state;
 
         case 'REMOVE_LISTITEM':
             taskGroups[action.taskGroupId].list = taskGroups[action.taskGroupId].list.filter((item) => {
@@ -58,23 +60,25 @@ export function rootReducer(state = initialState, action) {
             
             return {
                 taskGroups: taskGroups,
-                filterText: ""
+                searchText: ""
             };
 
         case 'CHECK_LISTITEM':
             taskGroups[action.taskGroupId].list[action.listItemId].done = !taskGroups[action.taskGroupId].list[action.listItemId].done;
             return {
                 taskGroups: taskGroups,
-                filterText: ""
+                searchText: ""
             };
 
         case 'UPDATE_TEXT_LISTITEM':
+            return state;
 
         case 'SEARCH_TASK':
         	return {
         		taskGroups: state.taskGroups,
         		searchText: action.text
-        	}
+        	};
+
         default:
             return state;
     }
