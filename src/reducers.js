@@ -68,7 +68,10 @@ export function rootReducer(state = initialState, action) {
         case 'UPDATE_TEXT_LISTITEM':
 
         case 'SEARCH_TASK':
-
+        	return {
+        		taskGroups: state.taskGroups,
+        		searchText: action.text
+        	}
         default:
             return state;
     }

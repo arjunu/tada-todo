@@ -25,7 +25,7 @@ class App extends Component {
 
         return <div className="to-do-wrapper">
             <h1 className="fleft">Tada ToDo</h1>
-            <SearchTask/>
+            <SearchTask onSearch={actions.searchTask}/>
             <div className="to-do__task-group-wrapper clearall clearfix">
                 {taskGroups}
                 <AddButton handleClick={actions.createTaskGroup}/>
