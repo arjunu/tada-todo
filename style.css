@@ -143,6 +143,11 @@ li{
     color: #6B6969;
     padding: 15px;
 }
+.to-do__task-group__header .to-do-default-text-box{
+    padding: 0;
+    width: 100%;
+    display:none;
+}
 
 .to-do__task-group__header__perc{
     margin-left: 10px;

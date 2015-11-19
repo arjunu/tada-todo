@@ -13,6 +13,7 @@ export default class TaskGroup extends React.Component {
 				<div className="to-do__task-group__header">
 					<span className="bold-text">Design Tasks</span>
 					<span className="to-do__task-group__header__perc">(78%)</span>
+					<input type="text" className="to-do-default-text-box"/>
 				</div>
 				<div className="to-do__task-group__progress-bar">
 					<div className="to-do__task-group__progress-bar--perc-completed"></div>
