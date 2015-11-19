@@ -7,9 +7,12 @@ export default class TaskGroup extends React.Component {
 
     onListItemCheck(event, listItemId, taskGroupId) {
         event.stopPropagation();
-        console.log("onListItemCheck", taskGroupId, listItemId);
-        console.log(this.props);
         this.props.onListItemCheck(taskGroupId, listItemId);
+    }
+
+    ListItemDelete(event, listItemId, taskGroupId) {
+        event.stopPropagation();
+        this.props.onListItemDelete(taskGroupId, listItemId);
     }
 
     render() {
@@ -18,14 +21,19 @@ export default class TaskGroup extends React.Component {
         let listElements = list
             .map(
             (listItem, index) => (
-                <li key={listItem.id} className="to-do__task-group__task-list__item clearfix" onClick={(event) => this.onListItemCheck(event, listItem.id, id)}>
-                    <label className="fleft">
+                <li key={listItem.id}
+                    className="to-do__task-group__task-list__item clearfix"
+                    onClick={(event) => this.onListItemCheck(event, listItem.id, id)}>
+
+                    <span className="fleft">
                         <input type="checkbox" checked={listItem.done}/>
                         <span className="to-do__task-group__task-list__item__name">{listItem.name}</span>
-                    </label>
-                    <div className="to-do__task-group__task-list__item__delete fright">
+                    </span>
+
+                    <div className="to-do__task-group__task-list__item__delete fright" onClick={(event) => this.ListItemDelete(event, listItem.id, id)}>
                         <span className="to-do__task-group__task-list__item__delete__ico">+</span>
                     </div>
+
                 </li>
             ));
 

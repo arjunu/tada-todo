@@ -1,5 +1,5 @@
 const initialState = {
-    taskGroups: [{
+    taskGroups: [ {
         id: 0,
         title: "Shopping list",
         list: [
@@ -29,6 +29,7 @@ const initialState = {
 
 
 export function rootReducer(state = initialState, action) {
+    let taskGroups = state.taskGroups.slice(0);
 
     switch (action.type) {
 
@@ -50,10 +51,14 @@ export function rootReducer(state = initialState, action) {
         case 'ADD_LISTITEM':
 
         case 'REMOVE_LISTITEM':
+            delete taskGroups[action.taskGroupId].list[action.listItemId];
+
+            return {
+                taskGroups: taskGroups,
+                filterText: ""
+            };
 
         case 'CHECK_LISTITEM':
-            console.log("action CHECK_LISTITEM", action);
-            let taskGroups = state.taskGroups.slice(0);
             taskGroups[action.taskGroupId].list[action.listItemId].done = !taskGroups[action.taskGroupId].list[action.listItemId].done;
             return {
                 taskGroups: taskGroups,

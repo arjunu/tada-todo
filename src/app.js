@@ -14,7 +14,12 @@ class App extends Component {
         let {taskGroups, searchText} = store;
         taskGroups = this.props.store.taskGroups.map(
             (taskGroup, index) => (
-                <TaskGroup key={taskGroup.id} filterBy={searchText} data={taskGroup} onListItemCheck={actions.checkListItem} onDelete={actions.removeTaskGroup}>
+                <TaskGroup key={taskGroup.id}
+                           filterBy={searchText}
+                           data={taskGroup}
+                           onListItemCheck={actions.checkListItem}
+                           onListItemDelete={actions.removeListItem}
+                           onDelete={actions.removeTaskGroup}>
                 </TaskGroup>
             ));
 
