@@ -98,9 +98,11 @@ li{
     box-shadow: 0 0 6px rgba(128, 117, 117, 0.4);
     position: relative;
     transition:all 0.23s ease-in;
-    animation:entrGrp 0.233s ease-in-out;
 }
 
+.to-do__task-group:not(.to-do__add-task-group){
+    animation:entrGrp 0.233s ease-in-out;    
+}
 @keyframes entrGrp{
     from{
         opacity:0.3;
@@ -185,6 +187,18 @@ li{
     padding: 5px 14px 7px;
     font-size: 33px;
     cursor:pointer;
+}
+
+.to-do__add-task-group:active{
+    animation: zoomOut 0.233s ease-in-out;
+}
+
+@keyframes zoomOut{
+    from{
+        transform:scale(0.9);
+    } to{
+        transform:scale(1);
+    }
 }
 
 .to-do__task-group__close{
