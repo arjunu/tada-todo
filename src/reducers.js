@@ -14,13 +14,13 @@ const initialState = {
             list: [
                 {id: 0, name: "Vinoj", done: false},
                 {id: 1, name: "Sandeep", done: true},
-                {id: 3, name: "Amala", done: true},
-                {id: 4, name: "Dixy", done: true},
-                {id: 5, name: "Ajay", done: true},
-                {id: 6, name: "Ashwin", done: true},
-                {id: 7, name: "Yashin", done: true},
-                {id: 8, name: "Mudassir", done: true},
-                {id: 9, name: "Ishan", done: true}
+                {id: 2, name: "Amala", done: true},
+                {id: 3, name: "Dixy", done: true},
+                {id: 4, name: "Ajay", done: true},
+                {id: 5, name: "Ashwin", done: true},
+                {id: 6, name: "Yashin", done: true},
+                {id: 7, name: "Mudassir", done: true},
+                {id: 8, name: "Ishan", done: true}
             ]
         }
     ],
@@ -52,7 +52,13 @@ export function rootReducer(state = initialState, action) {
         case 'REMOVE_LISTITEM':
 
         case 'CHECK_LISTITEM':
-            return
+            console.log("action CHECK_LISTITEM", action);
+            let taskGroups = state.taskGroups.slice(0);
+            taskGroups[action.taskGroupId].list[action.listItemId].done = !taskGroups[action.taskGroupId].list[action.listItemId].done;
+            return {
+                taskGroups: taskGroups,
+                filterText: ""
+            };
 
         case 'UPDATE_TEXT_LISTITEM':
 

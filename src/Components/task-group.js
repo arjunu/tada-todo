@@ -7,8 +7,9 @@ export default class TaskGroup extends React.Component {
 
     onListItemCheck(event, listItemId, taskGroupId) {
         event.stopPropagation();
-        console.log("onListItemCheck", listItemId, taskGroupId);
-        //this.props.onListItemCheck(listItemId, taskGroupId);
+        console.log("onListItemCheck", taskGroupId, listItemId);
+        console.log(this.props);
+        this.props.onListItemCheck(taskGroupId, listItemId);
     }
 
     render() {
@@ -29,7 +30,6 @@ export default class TaskGroup extends React.Component {
             ));
 
         completeness = Math.round(list.reduce((sum = 0, listItem) => {
-            console.log(listItem, sum);
             if (listItem.done) return sum+=1;
             else return sum;
         }, 0)/list.length * 100);

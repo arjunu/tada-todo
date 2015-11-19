@@ -9,12 +9,12 @@ import AddButton from './components/add-button';
 
 class App extends Component {
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         let {store, actions} = this.props;
         let {taskGroups, filterText} = store;
         taskGroups = this.props.store.taskGroups.map(
             (taskGroup, index) => (
-                <TaskGroup key={taskGroup.id} filterBy={filterText} data={taskGroup} onDelete={actions.removeTaskGroup}>
+                <TaskGroup key={taskGroup.id} filterBy={filterText} data={taskGroup} onListItemCheck={actions.checkListItem} onDelete={actions.removeTaskGroup}>
                 </TaskGroup>
             ));
 
