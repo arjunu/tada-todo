@@ -5,12 +5,19 @@ export default class TaskGroup extends React.Component {
         super(props, context);
     }
 
-    render() {
-        let { title, list} = this.props.data, completeness;
+    onListItemCheck(event, listItemId, taskGroupId) {
+        event.stopPropagation();
+        console.log("onListItemCheck", listItemId, taskGroupId);
+        //this.props.onListItemCheck(listItemId, taskGroupId);
+    }
 
-        let listElements = list.map(
+    render() {
+        let { title, list, id} = this.props.data, completeness;
+
+        let listElements = list
+            .map(
             (listItem, index) => (
-                <li key={listItem.id} className="to-do__task-group__task-list__item clearfix">
+                <li key={listItem.id} className="to-do__task-group__task-list__item clearfix" onClick={(event) => this.onListItemCheck(event, listItem.id, id)}>
                     <label className="fleft">
                         <input type="checkbox" checked={listItem.done}/>
                         <span className="to-do__task-group__task-list__item__name">{listItem.name}</span>

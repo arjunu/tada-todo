@@ -9,10 +9,12 @@ import AddButton from './components/add-button';
 
 class App extends Component {
     render() {
-        let {actions} = this.props;
-        let taskGroups = this.props.taskGroups.map(
+        console.log(this.props);
+        let {store, actions} = this.props;
+        let {taskGroups, searchText} = store;
+        taskGroups = this.props.store.taskGroups.map(
             (taskGroup, index) => (
-                <TaskGroup key={taskGroup.id} data={taskGroup} onDelete={actions.removeTaskGroup}>
+                <TaskGroup key={taskGroup.id} filterBy={searchText} data={taskGroup} onDelete={actions.removeTaskGroup}>
                 </TaskGroup>
             ));
 
@@ -28,7 +30,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-    return {taskGroups: state};
+    return {store: state};
 }
 
 function mapDispatchToProps(dispatch) {
