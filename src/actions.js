@@ -30,6 +30,5 @@ export default {
     
     searchTask(text){
         return {type : 'SEARCH_TASK', text}
-    }
-    
+    }    
 }
