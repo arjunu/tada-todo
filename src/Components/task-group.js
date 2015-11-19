@@ -6,12 +6,14 @@ export default class TaskGroup extends React.Component {
     }
 
     render() {
-        let { title, list} = this.props.data, completeness = 0;
+        let { title, list, id} = this.props.data, completeness = 0;
+        let sum;
+        
         let listElements = list.map(
             (listItem, index) => (
                 <li key={listItem.id} className="to-do__task-group__task-list__item clearfix">
                     <label className="fleft">
-                        <input type="checkbox" value={listItem.done}/>
+                        <input type="checkbox" checked={listItem.done}/>
                         <span className="to-do__task-group__task-list__item__name">{listItem.name}</span>
                     </label>
                     <div className="to-do__task-group__task-list__item__delete fright">
@@ -19,16 +21,18 @@ export default class TaskGroup extends React.Component {
                     </div>
                 </li>
             ));
-        let sum;
+        
         completeness = list.reduce((sum = 0, listItem) => {
             console.log(listItem, sum);
             if (listItem.done) return sum+=1;
             else return sum;
         }, 0);
+        
         console.log("completeness", completeness, sum);
+        
         return <div className="to-do__task-group active fleft">
             <div className="to-do__task-group__close">
-                <div className="to-do__task-group__close__ico">+</div>
+                <div className="to-do__task-group__close__ico" onClick={() => this.props.onDelete(id)}>+</div>
             </div>
             <div className="to-do__task-group__header">
                 <span className="bold-text">{title}</span>

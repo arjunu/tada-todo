@@ -9,7 +9,6 @@ import App from './app';
 const store = configureStore();
 
 const rootElement = document.getElementById('root');
-console.log("script", Provider, store);
 
 render(
 <div>
