@@ -9,7 +9,7 @@ import AddButton from './components/add-button';
 
 class App extends Component {
     render() {
-        //console.log(this.props);
+        console.log("app props", this.props);
         let {store, actions} = this.props;
         let {taskGroups, searchText} = store;
         taskGroups = this.props.store.taskGroups.map(
