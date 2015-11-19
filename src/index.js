@@ -11,10 +11,10 @@ const store = configureStore();
 const rootElement = document.getElementById('root');
 
 render(
-<div>
-<Provider store={store}>
-    <App></App>
-    </Provider>
+    <div>
+        <Provider store={store}>
+            <App/>
+        </Provider>
     </div>,
     rootElement
 );

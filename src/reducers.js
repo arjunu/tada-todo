@@ -24,7 +24,7 @@ const initialState = {
             ]
         }
     ],
-    filterText: ""
+    searchText: ""
 };
 
 
