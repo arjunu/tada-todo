@@ -3,27 +3,32 @@ import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodoActions from './actions';
-import TaskGroup from './Components/TaskGroup';
-import SearchTask from './Components/SearchTask';
-import AddButton from './Components/AddButton';
+import TaskGroup from './components/task-group';
+import SearchTask from './components/search-task';
+import AddButton from './components/add-button';
 
 class App extends Component {
     render() {
-        const { taskGroupArray } = this.props;
-        
+        console.log(this.props);
+        let taskGroups = this.props.taskGroups.map(
+            (taskGroup, index) => (
+                <TaskGroup key={taskGroup.id} data={taskGroup}>
+                </TaskGroup>
+            ));
+
         return <div className="to-do-wrapper">
-                     <h1 className="fleft">Tada ToDo</h1>
-                    <SearchTask/>
-                    <div className="to-do__task-group-wrapper clearall clearfix">
-                        <TaskGroup/>
-                        <AddButton/>
-                    </div>
-                </div>
+            <h1 className="fleft">Tada ToDo</h1>
+            <SearchTask/>
+            <div className="to-do__task-group-wrapper clearall clearfix">
+                {taskGroups}
+                <AddButton/>
+            </div>
+        </div>
     }
 }
 
 function mapStateToProps(state) {
-    return {todos: state};
+    return {taskGroups: state};
 }
 
 function mapDispatchToProps(dispatch) {
