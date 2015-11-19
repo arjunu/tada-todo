@@ -9,10 +9,10 @@ import AddButton from './components/add-button';
 
 class App extends Component {
     render() {
-        console.log(this.props);
+        let {actions} = this.props;
         let taskGroups = this.props.taskGroups.map(
             (taskGroup, index) => (
-                <TaskGroup key={taskGroup.id} data={taskGroup}>
+                <TaskGroup key={taskGroup.id} data={taskGroup} onDelete={actions.removeTaskGroup}>
                 </TaskGroup>
             ));
 
@@ -21,7 +21,7 @@ class App extends Component {
             <SearchTask/>
             <div className="to-do__task-group-wrapper clearall clearfix">
                 {taskGroups}
-                <AddButton/>
+                <AddButton handleClick={actions.createTaskGroup}/>
             </div>
         </div>
     }

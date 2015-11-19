@@ -29,8 +29,16 @@ export function rootReducer(state = initialState, action) {
     switch (action.type) {
             
         case 'CREATE_TASKGROUP':
+                    return [
+                        ...state, 
+                        {   id: state.reduce((maxId, taskGroup) => Math.max(taskGroup.id, maxId), -1) + 1,
+                            title:'New Task Group',
+                            list: []
+                        }
+                    ];
             
         case 'REMOVE_TASKGROUP':
+                return state.filter(taskGroup => taskGroup.id !== action.taskGroupId);
             
         case 'ADD_TITLE':
             
