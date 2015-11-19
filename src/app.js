@@ -11,17 +11,14 @@ class App extends Component {
     render() {
         const { taskGroupArray } = this.props;
         
-        return <div>
-            <h1>Tada ToDo</h1>
-            <SearchTask/>
-            <div>
-                taskGroupArray.map( (taskGroup, index) => (
-                    <TaskGroup/>                   
-                    )
-                );
-            </div>
-            <AddButton/>
-        </div>
+        return <div className="to-do-wrapper">
+                     <h1 className="fleft">Tada ToDo</h1>
+                    <SearchTask/>
+                    <div className="to-do__task-group-wrapper clearall clearfix">
+                        <TaskGroup/>
+                        <AddButton/>
+                    </div>
+                </div>
     }
 }
 

@@ -1,0 +1,202 @@
+body{
+    background: #E6E6E6;
+    margin:0;
+    padding:0;
+    font-family:Tahoma, Open Sans;
+    font-size: 16px;
+    color:#999999;
+    box-sizing: border-box;
+}
+
+ul{
+    padding: 0;
+    margin:0;
+}
+
+li{
+    list-style: none;
+}
+
+.fleft{
+    float:left;
+}
+
+.fright{
+    float:right;
+}
+
+.bold-text{
+    font-weight:bold;
+}
+
+.clearfix:after{
+    content:'';
+    display:table;
+    clear:both;
+}
+
+.clearall{
+    clear:both;
+}
+
+.to-do__task-group-wrapper{
+    margin-top:20px;
+}
+.to-do__search-box{
+    margin-top: 24px;
+    margin-left: 27px;
+    float: left;
+}
+.to-do__search-box__ico{
+    background: url('src/images/magnifying-glass34.png') no-repeat;
+    width: 20px;
+    height: 20px;
+    background-size: 18px;
+    opacity: 0.6;
+    margin-top: 7px;
+}
+
+.to-do-wrapper{
+    padding: 25px;
+}
+
+.to-do-default-text-box{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #BBBBBB;
+    padding: 5px 0px;
+    outline:none;
+    color: #6B6980;
+}
+
+.to-do__search-box__input-wrapper .to-do-default-text-box{
+    width:650px;
+    border-bottom: 2px solid #8F8F8F;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.to-do__task-group__add-new-wrapper .to-do-default-text-box{
+    width:100%;
+    border-bottom-color:#CCCCCC;
+}
+
+.to-do__task-group__task-list{
+    padding: 15px 0;
+}
+
+.to-do__task-group__task-list-wrapper {
+    max-height: calc(100% - 220px);
+    overflow: auto;
+}
+
+.to-do__task-group{
+    background: #fff;
+    border-radius: 3px;
+    width: 300px;
+    margin: 20px 20px 0 0;
+    box-shadow: 0 0 6px rgba(128, 117, 117, 0.4);
+    position: relative;
+    transition:all 0.23s ease-in;
+}
+.to-do__task-group.active, .to-do__task-group:hover{
+    box-shadow: 0 0 14px rgb(128, 117, 117);
+}
+
+.to-do__task-group__add-new-wrapper{
+    background: #F3F3F3;
+    padding: 15px 11px 12px;
+}
+
+.to-do__task-group__task-list__item{
+    padding: 5px 15px;
+    padding-right:40px;
+}
+
+.to-do__task-group__task-list__item:hover{
+    background: #F3F3F3;
+}
+.to-do__task-group__task-list__item:hover .to-do__task-group__task-list__item__delete{
+    display:block;
+}
+
+.to-do__task-group__task-list__item__delete{
+    margin-top: 2px;
+    display: none;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+.to-do__task-group__task-list__item__delete__ico{
+    transform: rotate(45deg);
+    display: inline-block;
+    font-size: 22px;
+    height: 15px;
+    width: 15px;
+    transform-origin: right;
+}
+
+.to-do__task-group__task-list__item__name.striked{
+    text-decoration:line-through;
+}
+.to-do__task-group__header {
+    color: #6B6969;
+    padding: 15px;
+}
+
+.to-do__task-group__header__perc{
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.to-do__task-group__progress-bar{
+    height: 6px;
+    background: #E2F2ED;
+    position:relative;
+    width:100%;
+}
+
+.to-do__task-group__progress-bar--perc-completed{
+    height:100%;
+    position:absolute;
+    left:0px;
+    background: #4EDBB2;
+}
+
+.to-do__add-task-group{
+    width: auto;
+    padding: 5px 14px 7px;
+    font-size: 33px;
+    cursor:pointer;
+}
+
+.to-do__task-group__close{
+    position: absolute;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 17px;
+    text-align: center;
+    border-radius: 50%;
+    padding: 1px;
+    right: -7px;
+    top: -7px;
+    background: #F7F7F7;
+    display: none;
+    box-shadow: 0 0 5px #6B6969;
+    cursor:pointer;
+}
+
+.to-do__task-group__close__ico {
+    transform: rotate(45deg);
+    width: 100%;
+    height: 100%;
+}
+
+.to-do__task-group:hover .to-do__task-group__close{
+    display:block;
+}
+
+.to-do__task-group__task-list__item__delete:hover, .to-do__task-group__close:hover {
+    color: rgba(0, 0, 0, 0.78);
+}
