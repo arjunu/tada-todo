@@ -17,8 +17,9 @@ export default class TaskGroup extends React.Component {
     }
 
     onAddListItem(event, taskGroupId) {
-        if(event.keyCode===13) {
+        if(event.keyCode === 13) {
             this.props.onListItemAdd(event.target.value, taskGroupId);
+            event.target.value = '';
         }
     }
     
