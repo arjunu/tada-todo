@@ -24,16 +24,19 @@ class App extends Component {
             .map((taskGroup, index) => (
                 <TaskGroup
                     key={taskGroup.id}
+                    index={index}
                     filterBy={searchText}
                     data={taskGroup}
                     onListItemCheck={actions.checkListItem}
                     onListItemDelete={actions.removeListItem}
+                    onListItemAdd={actions.addListItem}
                     onDelete={actions.removeTaskGroup}
+                    handleDoubleClick={actions.addTitle}
                 />
             ));
 
         return <div className="to-do-wrapper">  
-            <h1 className="fleft">Tada Todo</h1>
+            <h1 className="fleft">TADA TODO</h1>
             <SearchTask onSearch={actions.searchTask}/>
             <div className="to-do__task-group-wrapper clearall clearfix">
                 {taskGroupElements}

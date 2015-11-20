@@ -4,24 +4,24 @@ export default {
         return { type: 'CREATE_TASKGROUP'};
     },
     
-    removeTaskGroup(taskGroupId) {
-        return { type: 'REMOVE_TASKGROUP', taskGroupId};
+    removeTaskGroup(taskGroupIndex) {
+        return { type: 'REMOVE_TASKGROUP', taskGroupIndex};
     },
     
-    addTitle(text) {
-        return { type: 'ADD_TITLE', text};
+    addTitle(text, taskGroupIndex) {
+         return { type: 'ADD_TITLE', text, taskGroupIndex};
     },
     
-    addListItem(text, taskGroupId) {
-        return { type: 'ADD_LISTITEM', text, taskGroupId};
+    addListItem(text, taskGroupIndex) {
+        return { type: 'ADD_LISTITEM', text, taskGroupIndex};
     },
     
-    removeListItem(taskGroupId, listItemId){
-        return { type: 'REMOVE_LISTITEM', taskGroupId, listItemId};
+    removeListItem(taskGroupIndex, listItemId){
+        return { type: 'REMOVE_LISTITEM', taskGroupIndex, listItemId};
     },
     
-    checkListItem(taskGroupId, listItemIndex){
-        return { type: 'CHECK_LISTITEM', taskGroupId, listItemIndex};
+    checkListItem(taskGroupIndex, listItemIndex){
+        return { type: 'CHECK_LISTITEM', taskGroupIndex, listItemIndex};
     },
     
     updateTextListItem(taskGroupId, listItemId){
