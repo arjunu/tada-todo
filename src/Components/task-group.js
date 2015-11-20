@@ -5,9 +5,9 @@ export default class TaskGroup extends React.Component {
         super(props, context);
     }
 
-    onListItemCheck(event, listItemId, taskGroupId) {
+    onListItemCheck(event, listItemIndex, taskGroupId) {
         event.stopPropagation();
-        this.props.onListItemCheck(taskGroupId, listItemId);
+        this.props.onListItemCheck(taskGroupId, listItemIndex);
     }
 
     ListItemDelete(event, listItemId, taskGroupId) {
@@ -16,23 +16,25 @@ export default class TaskGroup extends React.Component {
     }
 
     render() {
-        let { title, list, id} = this.props.data, completeness;
+        let { title, list, id } = this.props.data, completeness;
 
         let listElements = list
             .filter(listItem => listItem.name.toLowerCase().indexOf(this.props.filterBy) > -1)
-            .map(
-            (listItem, index) => (
+            .map((listItem, index) => (
                 <li
                     key={listItem.id}
                     className="to-do__task-group__task-list__item clearfix"
-                    onClick={(event) => this.onListItemCheck(event, listItem.id, id)}
+                    onClick={(event) => this.onListItemCheck(event, index, id)}
                 >
                     <span className="fleft">
                         <input type="checkbox" checked={listItem.done}/>
                         <span className="to-do__task-group__task-list__item__name">{listItem.name}</span>
                     </span>
 
-                    <div className="to-do__task-group__task-list__item__delete fright" onClick={(event) => this.ListItemDelete(event, listItem.id, id)}>
+                    <div
+                        className="to-do__task-group__task-list__item__delete fright"
+                        onClick={(event) => this.ListItemDelete(event, listItem.id, id)}
+                    >
                         <span className="to-do__task-group__task-list__item__delete__ico">+</span>
                     </div>
 
@@ -40,7 +42,7 @@ export default class TaskGroup extends React.Component {
             ));
 
         completeness = Math.round(list.reduce((sum = 0, listItem) => {
-            if (listItem.done) return sum+=1;
+            if (listItem.done) return sum + 1;
             else return sum;
         }, 0)/list.length * 100);
 

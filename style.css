@@ -180,6 +180,7 @@ li{
     position:absolute;
     left:0px;
     background: #4EDBB2;
+    transition: all 0.3s;
 }
 
 .to-do__add-task-group{

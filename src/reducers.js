@@ -70,7 +70,7 @@ export function rootReducer(state = initialState, action) {
             };
 
         case 'CHECK_LISTITEM':
-            taskGroups[action.taskGroupId].list[action.listItemId].done = !taskGroups[action.taskGroupId].list[action.listItemId].done;
+            taskGroups[action.taskGroupId].list[action.listItemIndex].done = !taskGroups[action.taskGroupId].list[action.listItemIndex].done;
             return {
                 taskGroups: taskGroups,
                 searchText: ""

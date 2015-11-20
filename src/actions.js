@@ -20,8 +20,8 @@ export default {
         return { type: 'REMOVE_LISTITEM', taskGroupId, listItemId};
     },
     
-    checkListItem(taskGroupId, listItemId){
-        return { type: 'CHECK_LISTITEM', taskGroupId, listItemId};
+    checkListItem(taskGroupId, listItemIndex){
+        return { type: 'CHECK_LISTITEM', taskGroupId, listItemIndex};
     },
     
     updateTextListItem(taskGroupId, listItemId){

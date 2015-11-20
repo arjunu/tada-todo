@@ -3,9 +3,9 @@ import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodoActions from './actions';
-import TaskGroup from 'components/task-group';
-import SearchTask from 'components/search-task';
-import AddButton from 'components/add-button';
+import TaskGroup from  './components/task-group';
+import SearchTask from './components/search-task';
+import AddButton from './components/add-button';
 
 class App extends Component {
     render() {
