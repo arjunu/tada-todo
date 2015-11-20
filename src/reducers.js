@@ -74,7 +74,6 @@ export function rootReducer(state = initialState, action) {
 
         case 'REMOVE_LISTITEM':
             taskGroups[action.taskGroupIndex].list = taskGroups[action.taskGroupIndex].list.filter((item) => (item.id !== action.listItemIndex));
-
             return {
                 taskGroups: taskGroups,
                 searchText: ""

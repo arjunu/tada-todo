@@ -4,16 +4,8 @@ export default class TaskGroup extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    onListItemCheck(event, listItemIndex, taskGroupId) {
-        event.stopPropagation();
-        this.props.onListItemCheck(taskGroupId, listItemIndex);
-    }
-
-    onListItemDelete(event, listItemId, taskGroupId) {
-        event.stopPropagation();
-        this.props.onListItemDelete(taskGroupId, listItemId);
+        this.onListItemDelete = this.props.onListItemDelete;
+        this.onListItemCheck = this.props.onListItemCheck;
     }
     
     onListItemEdit(event, taskGroupId, listItemId, listItemText) {
@@ -59,8 +51,8 @@ export default class TaskGroup extends React.Component {
             .map((listItem, index) => (
                 <li
                     key={listItem.id}
-                    className="to-do__task-group__task-list__item clearfix"                    
-                    onClick={(event) => this.onListItemCheck(event, index, taskGroupIndex)}>                   
+                    className="to-do__task-group__task-list__item clearfix"
+                    onClick={(event) => { event.stopPropagation(); this.onListItemCheck(taskGroupIndex, index); }}>
                     <span className="fleft">
                         <input type="checkbox" checked={listItem.done}/>
                         <span className="to-do__task-group__task-list__item__name user-select-enabled"
@@ -71,7 +63,7 @@ export default class TaskGroup extends React.Component {
 
                     <div
                         className="to-do__task-group__task-list__item__delete fright"
-                        onClick={(event) => this.onListItemDelete(event, listItem.id, taskGroupIndex)}>
+                        onClick={(event) => { event.stopPropagation(); this.onListItemDelete(taskGroupIndex, listItem.id); }}>
                         <span className="to-do__task-group__task-list__item__delete__ico">+</span>
                     </div>
                 </li>

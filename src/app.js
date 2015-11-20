@@ -8,6 +8,13 @@ import SearchTask from './components/search-task';
 import AddButton from './components/add-button';
 
 class App extends Component {
+    constructor() {
+      super();
+      this.createTaskGroup = this.createTaskGroup.bind(this);
+    }
+    createTaskGroup(){
+        
+    }
     render() {
         console.log("app props", this.props);
         let {data, actions} = this.props;
@@ -34,7 +41,7 @@ class App extends Component {
                     onListItemEdit={actions.updateListItem}
                 />
             ));
-
+        console.log(taskGroupElements)
         return <div className="to-do-wrapper">  
             <h1 className="fleft">TADA TODO</h1>
             <SearchTask onSearch={actions.searchTask}/>
