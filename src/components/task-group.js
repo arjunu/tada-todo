@@ -60,10 +60,11 @@ export default class TaskGroup extends React.Component {
                 <li
                     key={listItem.id}
                     className="to-do__task-group__task-list__item clearfix"                    
-                    onChange={(event) => this.onListItemCheck(event, index, taskGroupIndex)}>                   
+                    onClick={(event) => this.onListItemCheck(event, index, taskGroupIndex)}>                   
                     <span className="fleft">
                         <input type="checkbox" checked={listItem.done}/>
                         <span className="to-do__task-group__task-list__item__name user-select-enabled"
+                              onClick={(event) => event.stopPropagation()}
                               onDoubleClick={(event) => this.handleDoubleClick(event)}
                               onKeyDown={(event) => this.onListItemEdit(event, id, listItem.id, listItem.name)}>{listItem.name}</span>
                     </span>
