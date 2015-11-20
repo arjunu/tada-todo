@@ -60,11 +60,11 @@ export function rootReducer(state = initialState, action) {
             };
 
         case 'ADD_LISTITEM':
-            taskGroups[action.taskGroupIndex].list.
-                push({ done : false,
-                        id: taskGroups[action.taskGroupIndex].list.reduce((maxId, listItem) => Math.max(listItem.id, maxId), -1) + 1,
-                        name: action.text});
-            
+            taskGroups[action.taskGroupIndex].list = [...taskGroups[action.taskGroupIndex].list,
+                                                      { done : false,
+                                                        id: taskGroups[action.taskGroupIndex].list
+                                                                .reduce((maxId, listItem) => Math.max(listItem.id, maxId), -1) + 1,
+                                                        name: action.text}];            
             return {
                 taskGroups: taskGroups,
                 searchText: ""
