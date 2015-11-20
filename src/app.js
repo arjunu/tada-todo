@@ -8,6 +8,13 @@ import SearchTask from './components/search-task';
 import AddButton from './components/add-button';
 
 class App extends Component {
+    constructor() {
+      super();
+      this._bind('createTaskGroup');
+    }
+    createTaskGroup(){
+        
+    }
     render() {
         console.log("app props", this.props);
         let {data, actions} = this.props;
