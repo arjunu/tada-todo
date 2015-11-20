@@ -4,6 +4,7 @@ export default class TaskGroup extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onListItemDelete = this.props.onListItemDelete.bind(this);
     }
 
     onListItemCheck(event, listItemIndex, taskGroupId) {
@@ -11,10 +12,10 @@ export default class TaskGroup extends React.Component {
         this.props.onListItemCheck(taskGroupId, listItemIndex);
     }
 
-    onListItemDelete(event, listItemId, taskGroupId) {
-        event.stopPropagation();
-        this.props.onListItemDelete(taskGroupId, listItemId);
-    }
+//    onListItemDelete(event, listItemId, taskGroupId) {
+//        event.stopPropagation();
+//        this.props.onListItemDelete(taskGroupId, listItemId);
+//    }
 
     onAddListItem(event, taskGroupId) {
         if(event.keyCode === 13) {
@@ -51,7 +52,7 @@ export default class TaskGroup extends React.Component {
 
                     <div
                         className="to-do__task-group__task-list__item__delete fright"
-                        onClick={(event) => this.onListItemDelete(event, listItem.id, taskGroupIndex)}>
+                        onClick={(event) => {event.stopPropagation(); this.onListItemDelete(listItem.id, taskGroupIndex); }}>
                         <span className="to-do__task-group__task-list__item__delete__ico">+</span>
                     </div>
                 </li>

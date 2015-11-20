@@ -71,6 +71,7 @@ export function rootReducer(state = initialState, action) {
             };
 
         case 'REMOVE_LISTITEM':
+            console.log(action, taskGroups, taskGroups[action.taskGroupIndex])
             taskGroups[action.taskGroupIndex].list = taskGroups[action.taskGroupIndex].list.filter((item) => (item.id !== action.listItemId));
 
             return {

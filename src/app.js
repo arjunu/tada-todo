@@ -10,7 +10,7 @@ import AddButton from './components/add-button';
 class App extends Component {
     constructor() {
       super();
-      this._bind('createTaskGroup');
+      this.createTaskGroup = this.createTaskGroup.bind(this);
     }
     createTaskGroup(){
         
@@ -34,7 +34,7 @@ class App extends Component {
                     handleDoubleClick={actions.addTitle}
                 />
             ));
-
+        console.log(taskGroupElements)
         return <div className="to-do-wrapper">  
             <h1 className="fleft">TADA TODO</h1>
             <SearchTask onSearch={actions.searchTask}/>
