@@ -12,8 +12,14 @@ class App extends Component {
         console.log("app props", this.props);
         let {data, actions} = this.props;
         let {taskGroups, searchText} = data;
-        let taskGroupElements = taskGroups
-        //.filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length)
+        let filteredGroup;
+        if(searchText) {
+            filteredGroup = taskGroups
+        .filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length);
+        } else {
+            filteredGroup = taskGroups;
+        }
+        let taskGroupElements = filteredGroup
             .map((taskGroup, index) => (
                 <TaskGroup
                     key={taskGroup.id}
