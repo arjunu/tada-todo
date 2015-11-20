@@ -38,7 +38,7 @@ export function rootReducer(state = initialState, action) {
                 taskGroups: [
                     ...state.taskGroups,
                     {
-                        id: state.taskGroups.reduce((maxId, taskGroup) => Math.max(taskGroup.id, maxId), -1) + 1,
+                        id: taskGroups.reduce((maxId, taskGroup) => Math.max(taskGroup.id, maxId), -1) + 1,
                         title: 'New Task Group',
                         list: []
                     }
@@ -48,7 +48,7 @@ export function rootReducer(state = initialState, action) {
 
         case 'REMOVE_TASKGROUP':
             return {
-                taskGroups: [state.taskGroups.filter(taskGroup => taskGroup.id !== action.taskGroupId)],
+                taskGroups: taskGroups.filter(taskGroup => taskGroup.id !== action.taskGroupId),
                 searchText: ""
             };
 
@@ -59,10 +59,7 @@ export function rootReducer(state = initialState, action) {
             return state;
 
         case 'REMOVE_LISTITEM':
-            taskGroups[action.taskGroupId].list = taskGroups[action.taskGroupId].list.filter((item) => {
-                console.log(item.id, action.listItemId);
-                return item.id !== action.listItemId;
-            });
+            taskGroups[action.taskGroupId].list = taskGroups[action.taskGroupId].list.filter((item) => (item.id !== action.listItemId));
 
             return {
                 taskGroups: taskGroups,
