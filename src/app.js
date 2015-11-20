@@ -13,7 +13,7 @@ class App extends Component {
         let {data, actions} = this.props;
         let {taskGroups, searchText} = data;
         let taskGroupElements = taskGroups
-            //.filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length)
+        //.filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length)
             .map((taskGroup, index) => (
                 <TaskGroup
                     key={taskGroup.id}
@@ -23,11 +23,11 @@ class App extends Component {
                     onListItemCheck={actions.checkListItem}
                     onListItemDelete={actions.removeListItem}
                     onListItemAdd={actions.addListItem}
-                    onDelete={actions.removeTaskGroup}
-                />
+                    onDelete={actions.removeTaskGroup}>
+                </TaskGroup>
             ));
 
-        return <div className="to-do-wrapper">  
+        return <div className="to-do-wrapper">
             <h1 className="fleft">Tada Todo</h1>
             <SearchTask onSearch={actions.searchTask}/>
             <div className="to-do__task-group-wrapper clearall clearfix">
