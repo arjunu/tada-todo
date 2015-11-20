@@ -53,7 +53,11 @@ export function rootReducer(state = initialState, action) {
             };
 
         case 'ADD_TITLE':
-            return state;
+            taskGroups[action.taskGroupId].title = action.text;
+            return {
+                taskGroups: taskGroups,
+                searchText: ""
+            };
 
         case 'ADD_LISTITEM':
             return state;

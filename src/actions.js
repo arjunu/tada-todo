@@ -8,8 +8,8 @@ export default {
         return { type: 'REMOVE_TASKGROUP', taskGroupId};
     },
     
-    addTitle(text) {
-        return { type: 'ADD_TITLE', text};
+    addTitle(text, taskGroupId) {
+         return { type: 'ADD_TITLE', text, taskGroupId};
     },
     
     addListItem(text, taskGroupIndex) {

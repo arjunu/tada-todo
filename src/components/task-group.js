@@ -3,6 +3,7 @@ import React from 'react';
 export default class TaskGroup extends React.Component {
     constructor(props, context) {
         super(props, context);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     onListItemCheck(event, listItemIndex, taskGroupId) {
@@ -18,6 +19,17 @@ export default class TaskGroup extends React.Component {
     onAddListItem(event, taskGroupId) {
         if(event.keyCode===13) {
             this.props.onListItemAdd(event.target.value, taskGroupId);
+        }
+    }
+    
+    handleDoubleClick(e, id){
+        e.target.contentEditable = true;
+    }
+    
+    handleSubmit(e, id) {
+        if (e.which === 13) {
+            this.props.handleDoubleClick(e.currentTarget.innerText, id);
+            e.target.contentEditable = false;
         }
     }
 
@@ -54,9 +66,11 @@ export default class TaskGroup extends React.Component {
                 <div className="to-do__task-group__close__ico" onClick={() => this.props.onDelete(id)}>+</div>
             </div>
             <div className="to-do__task-group__header">
-                <span className="bold-text user-select-enabled">{title}</span>
-                <span className="to-do__task-group__header__perc">({completeness}%)</span>
-                <input type="text" className="to-do-default-text-box"/>
+                 <span className="bold-text" id={'title'+id} 
+                      onDoubleClick={(event) => this.handleDoubleClick(event, id)}
+                      onKeyPress={(event) => this.handleSubmit(event, id)}>
+                {title}</span>
+                <span className="to-do__task-group__header__perc">({completeness||''}%)</span>
             </div>
             <div className="to-do__task-group__progress-bar">
                 <div className="to-do__task-group__progress-bar--perc-completed"
