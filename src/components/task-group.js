@@ -27,9 +27,13 @@ export default class TaskGroup extends React.Component {
         e.target.contentEditable = true;
     }
     
-    handleSubmit(e, id) {
+    handleSubmit(e, id, title) {
         if (e.which === 13) {
             this.props.handleDoubleClick(e.currentTarget.innerText, id);
+            e.target.contentEditable = false;
+        }
+        if(e.which === 27){
+            e.currentTarget.innerText = title;
             e.target.contentEditable = false;
         }
     }
@@ -69,7 +73,7 @@ export default class TaskGroup extends React.Component {
             <div className="to-do__task-group__header">
                  <span className="bold-text" id={'title'+id} 
                       onDoubleClick={(event) => this.handleDoubleClick(event, id)}
-                      onKeyPress={(event) => this.handleSubmit(event, id)}>
+                      onKeyDown={(event) => this.handleSubmit(event, id, title)}>
                 {title}</span>
                 <span className="to-do__task-group__header__perc">({completeness||''}%)</span>
             </div>
