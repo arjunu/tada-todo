@@ -48,19 +48,25 @@ export function rootReducer(state = initialState, action) {
 
         case 'REMOVE_TASKGROUP':
             return {
-                taskGroups: taskGroups.filter(taskGroup => taskGroup.id !== action.taskGroupId),
+                taskGroups: taskGroups.filter(taskGroup => taskGroup.id !== action.taskGroupIndex),
                 searchText: ""
             };
 
         case 'ADD_TITLE':
-            return state;
+            taskGroups[action.taskGroupIndex].title = action.text;
+            return {
+                taskGroups: taskGroups,
+                searchText: ""
+            };
 
         case 'ADD_LISTITEM':
-            taskGroups[action.taskGroupIndex].list = [...taskGroups[action.taskGroupIndex].list[action.listItemIndex], {
-                id: 11,
-                done: false,
-                text: action.text
-            }];
+            taskGroups[action.taskGroupIndex].list = [...taskGroups[action.taskGroupIndex].list,
+                {
+                    done: false,
+                    id: taskGroups[action.taskGroupIndex].list
+                        .reduce((maxId, listItem) => Math.max(listItem.id, maxId), -1) + 1,
+                    name: action.text
+                }];
             return {
                 taskGroups: taskGroups,
                 searchText: ""
