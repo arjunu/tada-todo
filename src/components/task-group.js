@@ -4,18 +4,9 @@ export default class TaskGroup extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onListItemDelete = this.props.onListItemDelete.bind(this);
+        this.onListItemDelete = this.props.onListItemDelete;
+        this.onListItemCheck = this.props.onListItemCheck;
     }
-
-    onListItemCheck(event, listItemIndex, taskGroupId) {
-        event.stopPropagation();
-        this.props.onListItemCheck(taskGroupId, listItemIndex);
-    }
-
-//    onListItemDelete(event, listItemId, taskGroupId) {
-//        event.stopPropagation();
-//        this.props.onListItemDelete(taskGroupId, listItemId);
-//    }
 
     onAddListItem(event, taskGroupId) {
         if(event.keyCode === 13) {
@@ -44,7 +35,7 @@ export default class TaskGroup extends React.Component {
                 <li
                     key={listItem.id}
                     className="to-do__task-group__task-list__item clearfix"
-                    onClick={(event) => this.onListItemCheck(event, index, taskGroupIndex)}>
+                    onClick={(event) => { event.stopPropagation(); this.onListItemCheck(taskGroupIndex, index); }}>
                     <span className="fleft">
                         <input type="checkbox" checked={listItem.done}/>
                         <span className="to-do__task-group__task-list__item__name user-select-enabled">{listItem.name}</span>
@@ -52,7 +43,7 @@ export default class TaskGroup extends React.Component {
 
                     <div
                         className="to-do__task-group__task-list__item__delete fright"
-                        onClick={(event) => {event.stopPropagation(); this.onListItemDelete(listItem.id, taskGroupIndex); }}>
+                        onClick={(event) => { event.stopPropagation(); this.onListItemDelete(taskGroupIndex, listItem.id); }}>
                         <span className="to-do__task-group__task-list__item__delete__ico">+</span>
                     </div>
                 </li>
