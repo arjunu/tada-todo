@@ -73,7 +73,7 @@ export function rootReducer(state = initialState, action) {
             };
 
         case 'REMOVE_LISTITEM':
-            taskGroups[action.taskGroupIndex].list = taskGroups[action.taskGroupIndex].list.filter((item) => (item.id !== action.listItemId));
+            taskGroups[action.taskGroupIndex].list = taskGroups[action.taskGroupIndex].list.filter((item) => (item.id !== action.listItemIndex));
 
             return {
                 taskGroups: taskGroups,
@@ -92,8 +92,17 @@ export function rootReducer(state = initialState, action) {
                 searchText: ""
             };
 
-        case 'UPDATE_TEXT_LISTITEM':
-            return state;
+        case 'UPDATE_LISTITEM':
+            taskGroups[action.taskGroupIndex].list[action.listItemIndex] = Object.assign({}, {
+                id: taskGroups[action.taskGroupIndex].list[action.listItemIndex].id,
+                done: taskGroups[action.taskGroupIndex].list[action.listItemIndex].done,
+                name: action.text
+            });
+
+            return {
+                taskGroups: taskGroups,
+                searchText: ""
+            };
 
         case 'SEARCH_TASK':
             return {

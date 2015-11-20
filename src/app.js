@@ -24,7 +24,8 @@ class App extends Component {
                     onListItemDelete={actions.removeListItem}
                     onListItemAdd={actions.addListItem}
                     onDelete={actions.removeTaskGroup}
-                    handleDoubleClick={actions.addTitle}
+                    onEditTitle={actions.addTitle}
+                    onListItemEdit={actions.updateListItem}
                 />
             ));
 

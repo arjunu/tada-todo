@@ -15,6 +15,14 @@ export default class TaskGroup extends React.Component {
         event.stopPropagation();
         this.props.onListItemDelete(taskGroupId, listItemId);
     }
+    
+    onListItemEdit(event, taskGroupId, listItemId) {
+        if(event.keyCode === 13) {
+            event.stopPropagation();
+            this.props.onListItemEdit(event.currentTarget.innerText, taskGroupId, listItemId);
+            event.target.contentEditable = false;
+        }
+    }
 
     onAddListItem(event, taskGroupId) {
         if(event.keyCode === 13) {
@@ -23,13 +31,14 @@ export default class TaskGroup extends React.Component {
         }
     }
     
-    handleDoubleClick(e, id){
+    handleDoubleClick(e){
         e.target.contentEditable = true;
+        e.preventDefault();
     }
     
     handleSubmit(e, id, title) {
         if (e.which === 13) {
-            this.props.handleDoubleClick(e.currentTarget.innerText, id);
+            this.props.onEditTitle(e.currentTarget.innerText, id);
             e.target.contentEditable = false;
         }
         if(e.which === 27){
@@ -46,11 +55,13 @@ export default class TaskGroup extends React.Component {
             .map((listItem, index) => (
                 <li
                     key={listItem.id}
-                    className="to-do__task-group__task-list__item clearfix"
-                    onClick={(event) => this.onListItemCheck(event, index, taskGroupIndex)}>
+                    className="to-do__task-group__task-list__item clearfix"                    
+                    onClick={(event) => this.onListItemCheck(event, index, taskGroupIndex)}>                   
                     <span className="fleft">
                         <input type="checkbox" checked={listItem.done}/>
-                        <span className="to-do__task-group__task-list__item__name user-select-enabled">{listItem.name}</span>
+                        <span className="to-do__task-group__task-list__item__name user-select-enabled"
+                              onDoubleClick={(event) => this.handleDoubleClick(event)}
+                              onKeyDown={(event) => this.onListItemEdit(event, id, listItem.id)}>{listItem.name}</span>
                     </span>
 
                     <div
@@ -72,7 +83,7 @@ export default class TaskGroup extends React.Component {
             </div>
             <div className="to-do__task-group__header">
                  <span className="bold-text" id={'title'+id} 
-                      onDoubleClick={(event) => this.handleDoubleClick(event, id)}
+                      onDoubleClick={(event) => this.handleDoubleClick(event)}
                       onKeyDown={(event) => this.handleSubmit(event, id, title)}>
                 {title}</span>
                 <span className="to-do__task-group__header__perc">({completeness||''}%)</span>
