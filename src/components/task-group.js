@@ -16,10 +16,14 @@ export default class TaskGroup extends React.Component {
         this.props.onListItemDelete(taskGroupId, listItemId);
     }
     
-    onListItemEdit(event, taskGroupId, listItemId) {
+    onListItemEdit(event, taskGroupId, listItemId, listItemText) {
         if(event.keyCode === 13) {
             event.stopPropagation();
             this.props.onListItemEdit(event.currentTarget.innerText, taskGroupId, listItemId);
+            event.target.contentEditable = false;
+        }
+        if(event.which === 27){
+            event.currentTarget.innerText = listItemText;
             event.target.contentEditable = false;
         }
     }
@@ -61,7 +65,7 @@ export default class TaskGroup extends React.Component {
                         <input type="checkbox" checked={listItem.done}/>
                         <span className="to-do__task-group__task-list__item__name user-select-enabled"
                               onDoubleClick={(event) => this.handleDoubleClick(event)}
-                              onKeyDown={(event) => this.onListItemEdit(event, id, listItem.id)}>{listItem.name}</span>
+                              onKeyDown={(event) => this.onListItemEdit(event, id, listItem.id, listItem.name)}>{listItem.name}</span>
                     </span>
 
                     <div
