@@ -22,10 +22,11 @@ export default class TaskGroup extends React.Component {
             .filter(listItem => listItem.name.toLowerCase().indexOf(this.props.filterBy) > -1)
             .map(
             (listItem, index) => (
-                <li key={listItem.id}
+                <li
+                    key={listItem.id}
                     className="to-do__task-group__task-list__item clearfix"
-                    onClick={(event) => this.onListItemCheck(event, listItem.id, id)}>
-
+                    onClick={(event) => this.onListItemCheck(event, listItem.id, id)}
+                >
                     <span className="fleft">
                         <input type="checkbox" checked={listItem.done}/>
                         <span className="to-do__task-group__task-list__item__name">{listItem.name}</span>

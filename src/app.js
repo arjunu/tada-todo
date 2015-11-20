@@ -3,9 +3,9 @@ import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodoActions from './actions';
-import TaskGroup from './components/task-group';
-import SearchTask from './components/search-task';
-import AddButton from './components/add-button';
+import TaskGroup from 'components/task-group';
+import SearchTask from 'components/search-task';
+import AddButton from 'components/add-button';
 
 class App extends Component {
     render() {
@@ -14,15 +14,15 @@ class App extends Component {
         let {taskGroups, searchText} = data;
         let taskGroupElements = taskGroups
             .filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length)
-            .map(
-            (taskGroup, index) => (
-                <TaskGroup key={taskGroup.id}
-                           filterBy={searchText}
-                           data={taskGroup}
-                           onListItemCheck={actions.checkListItem}
-                           onListItemDelete={actions.removeListItem}
-                           onDelete={actions.removeTaskGroup}>
-                </TaskGroup>
+            .map((taskGroup, index) => (
+                <TaskGroup
+                    key={taskGroup.id}
+                    filterBy={searchText}
+                    data={taskGroup}
+                    onListItemCheck={actions.checkListItem}
+                    onListItemDelete={actions.removeListItem}
+                    onDelete={actions.removeTaskGroup}
+                />
             ));
 
         return <div className="to-do-wrapper">  
