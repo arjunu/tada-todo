@@ -13,7 +13,7 @@ class App extends Component {
         let {data, actions} = this.props;
         let {taskGroups, searchText} = data;
         let taskGroupElements = taskGroups
-            .filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length)
+            //.filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length)
             .map((taskGroup, index) => (
                 <TaskGroup
                     key={taskGroup.id}
