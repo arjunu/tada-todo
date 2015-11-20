@@ -28,7 +28,7 @@ export default class TaskGroup extends React.Component {
                 >
                     <span className="fleft">
                         <input type="checkbox" checked={listItem.done}/>
-                        <span className="to-do__task-group__task-list__item__name">{listItem.name}</span>
+                        <span className="to-do__task-group__task-list__item__name user-select-enabled">{listItem.name}</span>
                     </span>
 
                     <div
@@ -51,7 +51,7 @@ export default class TaskGroup extends React.Component {
                 <div className="to-do__task-group__close__ico" onClick={() => this.props.onDelete(id)}>+</div>
             </div>
             <div className="to-do__task-group__header">
-                <span className="bold-text">{title}</span>
+                <span className="bold-text user-select-enabled">{title}</span>
                 <span className="to-do__task-group__header__perc">({completeness}%)</span>
                 <input type="text" className="to-do-default-text-box"/>
             </div>
