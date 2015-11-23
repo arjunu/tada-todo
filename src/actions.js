@@ -4,7 +4,7 @@ export default {
         return { type: 'CREATE_TASKGROUP'};
     },
     
-    removeTaskGr7111oup(taskGroupIndex) {
+    removeTaskGroup(taskGroupIndex) {
         return { type: 'REMOVE_TASKGROUP', taskGroupIndex};
     },
     
@@ -32,4 +32,3 @@ export default {
         return {type : 'SEARCH_TASK', text}
     }    
 }
-//    7111#
