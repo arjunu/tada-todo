@@ -19,7 +19,7 @@ class App extends Component {
         console.log("app props", this.props);
         let {data, actions} = this.props;
         let {taskGroups, searchText} = data;
-        let filteredGroup;
+        let filteredGroup = [];
         if(searchText) {
             filteredGroup = taskGroups
         .filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length);

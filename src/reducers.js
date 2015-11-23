@@ -43,20 +43,20 @@ export function rootReducer(state = initialState, action) {
                         list: []
                     }
                 ],
-                searchText: ""
+                searchText: state.searchText
             };
 
         case 'REMOVE_TASKGROUP':
             return {
                 taskGroups: taskGroups.filter(taskGroup => taskGroup.id !== action.taskGroupIndex),
-                searchText: ""
+                searchText: state.searchText
             };
 
         case 'ADD_TITLE':
             taskGroups[action.taskGroupIndex].title = action.text;
             return {
                 taskGroups: taskGroups,
-                searchText: ""
+                searchText: state.searchText
             };
 
         case 'ADD_LISTITEM':
@@ -69,14 +69,14 @@ export function rootReducer(state = initialState, action) {
                 }];
             return {
                 taskGroups: taskGroups,
-                searchText: ""
+                searchText: state.searchText
             };
 
         case 'REMOVE_LISTITEM':
             taskGroups[action.taskGroupIndex].list = taskGroups[action.taskGroupIndex].list.filter((item) => (item.id !== action.listItemIndex));
             return {
                 taskGroups: taskGroups,
-                searchText: ""
+                searchText: state.searchText
             };
 
         case 'CHECK_LISTITEM':
@@ -88,7 +88,7 @@ export function rootReducer(state = initialState, action) {
 
             return {
                 taskGroups: taskGroups,
-                searchText: ""
+                searchText: state.searchText
             };
 
         case 'UPDATE_LISTITEM':
@@ -100,7 +100,7 @@ export function rootReducer(state = initialState, action) {
 
             return {
                 taskGroups: taskGroups,
-                searchText: ""
+                searchText: state.searchText
             };
 
         case 'SEARCH_TASK':
