@@ -28,7 +28,36 @@ const initialState = {
 };
 
 
+function taskGroupListReducer(list = [], action) {
+    switch (action.type) {
+
+        case "ADD_LISTITEM":
+            return [...list, {
+                done: false,
+                id: list
+                    .reduce((maxId, listItem) => Math.max(listItem.id, maxId), -1) + 1,
+                name: action.text
+            }];
+
+        case "REMOVE_LISTITEM":
+            return list.filter((item) => (item.id !== action.listItemIndex));
+
+        case "CHECK_LISTITEM":
+            return [...list.slice(0, action.listItemIndex),
+                {
+                    ...list[action.listItemIndex],
+                    done: !list[action.listItemIndex].done
+                },
+                ...list.slice(action.listItemIndex + 1)];
+
+        default:
+            return list;
+    }
+}
+
+
 export function rootReducer(state = initialState, action) {
+    //todo remove this line
     let taskGroups = [...state.taskGroups];
 
     switch (action.type) {
@@ -53,11 +82,8 @@ export function rootReducer(state = initialState, action) {
             };
 
         case 'EDIT_TITLE':
-            //taskGroups[action.taskGroupIndex].title = action.text;
-            console.log("EDIT_TITLE", action);
             return {
                 taskGroups: state.taskGroups.map(taskGroup => {
-                    console.log(taskGroup.id, action.taskGroupId);
                     if (taskGroup.id === action.taskGroupId)
                         return {
                             ...taskGroup, title: action.text
@@ -68,33 +94,17 @@ export function rootReducer(state = initialState, action) {
             };
 
         case 'ADD_LISTITEM':
-            taskGroups[action.taskGroupIndex].list = [...taskGroups[action.taskGroupIndex].list,
-                {
-                    done: false,
-                    id: taskGroups[action.taskGroupIndex].list
-                        .reduce((maxId, listItem) => Math.max(listItem.id, maxId), -1) + 1,
-                    name: action.text
-                }];
-            return {
-                taskGroups: taskGroups,
-                searchText: state.searchText
-            };
-
         case 'REMOVE_LISTITEM':
-            taskGroups[action.taskGroupIndex].list = taskGroups[action.taskGroupIndex].list.filter((item) => (item.id !== action.listItemIndex));
-            return {
-                taskGroups: taskGroups,
-                searchText: state.searchText
-            };
-
         case 'CHECK_LISTITEM':
-            taskGroups[action.taskGroupIndex].list[action.listItemIndex] = {
-                ...taskGroups[action.taskGroupIndex].list[action.listItemIndex],
-                done: !taskGroups[action.taskGroupIndex].list[action.listItemIndex].done
-            };
-
             return {
-                taskGroups: taskGroups,
+                taskGroups: state.taskGroups.map(taskGroup => {
+                    if (taskGroup.id === action.taskGroupId)
+                        return {
+                            ...taskGroup,
+                            list: taskGroupListReducer(taskGroup.list, action)
+                        };
+                    else  return taskGroup;
+                }),
                 searchText: state.searchText
             };
 

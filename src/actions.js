@@ -12,16 +12,16 @@ export default {
          return { type: 'EDIT_TITLE', text, taskGroupId};
     },
     
-    addListItem(text, taskGroupIndex) {
-        return { type: 'ADD_LISTITEM', text, taskGroupIndex};
+    addListItem(text, taskGroupId) {
+        return { type: 'ADD_LISTITEM', text, taskGroupId};
     },
     
-    removeListItem(taskGroupIndex, listItemIndex){
-        return { type: 'REMOVE_LISTITEM', taskGroupIndex, listItemIndex};
+    removeListItem(taskGroupId, listItemIndex){
+        return { type: 'REMOVE_LISTITEM', taskGroupId, listItemIndex};
     },
     
-    checkListItem(taskGroupIndex, listItemIndex){
-        return { type: 'CHECK_LISTITEM', taskGroupIndex, listItemIndex};
+    checkListItem(taskGroupId, listItemIndex){
+        return { type: 'CHECK_LISTITEM', taskGroupId, listItemIndex};
     },
     
     updateListItem(text, taskGroupIndex, listItemIndex){

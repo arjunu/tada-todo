@@ -60,7 +60,7 @@ export default class TaskGroup extends React.Component {
                 <li
                     key={listItem.id}
                     className="to-do__task-group__task-list__item clearfix"
-                    onClick={(event) => { event.stopPropagation(); this.onListItemCheck(taskGroupIndex, index); }}>
+                    onClick={(event) => { event.stopPropagation(); this.onListItemCheck(id, index); }}>
                     <span className="fleft">
                         <input type="checkbox" checked={listItem.done}/>
                         <span className="to-do__task-group__task-list__item__name user-select-enabled"
@@ -71,7 +71,7 @@ export default class TaskGroup extends React.Component {
 
                     <div
                         className="to-do__task-group__task-list__item__delete fright"
-                        onClick={(event) => { event.stopPropagation(); this.onListItemDelete(taskGroupIndex, listItem.id); }}>
+                        onClick={(event) => { event.stopPropagation(); this.onListItemDelete(id, listItem.id); }}>
                         <span className="to-do__task-group__task-list__item__delete__ico">+</span>
                     </div>
                 </li>
@@ -91,7 +91,9 @@ export default class TaskGroup extends React.Component {
             </div>
             <div className="to-do__task-group__header">
                  <ContentEditable className="bold-text" id={'title'+id}
-                                  onChange={(event) => this.onTitleChange(event, id)} tag="span" html={title}>
+                                  onChange={(event) => this.onTitleChange(event, id)}
+                                  tag="span"
+                                  html={title}>
 
                  </ContentEditable>
                 <span className="to-do__task-group__header__perc">({completeness || ''}%)</span>
