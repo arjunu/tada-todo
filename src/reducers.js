@@ -48,14 +48,22 @@ export function rootReducer(state = initialState, action) {
 
         case 'REMOVE_TASKGROUP':
             return {
-                taskGroups: taskGroups.filter(taskGroup => taskGroup.id !== action.taskGroupIndex),
+                taskGroups: state.taskGroups.filter(taskGroup => taskGroup.id !== action.taskGroupId),
                 searchText: state.searchText
             };
 
-        case 'ADD_TITLE':
-            taskGroups[action.taskGroupIndex].title = action.text;
+        case 'EDIT_TITLE':
+            //taskGroups[action.taskGroupIndex].title = action.text;
+            console.log("EDIT_TITLE", action);
             return {
-                taskGroups: taskGroups,
+                taskGroups: state.taskGroups.map(taskGroup => {
+                    console.log(taskGroup.id, action.taskGroupId);
+                    if (taskGroup.id === action.taskGroupId)
+                        return {
+                            ...taskGroup, title: action.text
+                        };
+                    else  return taskGroup;
+                }),
                 searchText: state.searchText
             };
 
@@ -81,7 +89,7 @@ export function rootReducer(state = initialState, action) {
 
         case 'CHECK_LISTITEM':
             taskGroups[action.taskGroupIndex].list[action.listItemIndex] = {
-                ...taskGroups[action.taskGroupIndex].list,
+                ...taskGroups[action.taskGroupIndex].list[action.listItemIndex],
                 done: !taskGroups[action.taskGroupIndex].list[action.listItemIndex].done
             };
 

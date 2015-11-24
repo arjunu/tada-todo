@@ -4,12 +4,12 @@ export default {
         return { type: 'CREATE_TASKGROUP'};
     },
     
-    removeTaskGroup(taskGroupIndex) {
-        return { type: 'REMOVE_TASKGROUP', taskGroupIndex};
+    removeTaskGroup(taskGroupId) {
+        return { type: 'REMOVE_TASKGROUP', taskGroupId};
     },
     
-    addTitle(text, taskGroupIndex) {
-         return { type: 'ADD_TITLE', text, taskGroupIndex};
+    editTitle(text, taskGroupId) {
+         return { type: 'EDIT_TITLE', text, taskGroupId};
     },
     
     addListItem(text, taskGroupIndex) {

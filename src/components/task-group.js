@@ -1,4 +1,5 @@
 import React from 'react';
+import ContentEditable from './content-editable';
 
 export default class TaskGroup extends React.Component {
     constructor(props, context) {
@@ -7,44 +8,51 @@ export default class TaskGroup extends React.Component {
         this.onListItemDelete = this.props.onListItemDelete;
         this.onListItemCheck = this.props.onListItemCheck;
     }
-    
+
     onListItemEdit(event, taskGroupId, listItemId, listItemText) {
-        if(event.keyCode === 13) {
+        if (event.keyCode === 13) {
             event.stopPropagation();
             this.props.onListItemEdit(event.currentTarget.innerText, taskGroupId, listItemId);
             event.target.contentEditable = false;
         }
-        if(event.which === 27){
+        if (event.which === 27) {
             event.currentTarget.innerText = listItemText;
             event.target.contentEditable = false;
         }
     }
 
     onAddListItem(event, taskGroupId) {
-        if(event.keyCode === 13) {
+        if (event.keyCode === 13) {
             this.props.onListItemAdd(event.target.value, taskGroupId);
             event.target.value = '';
         }
     }
-    
-    handleDoubleClick(e){
+
+    handleDoubleClick(e) {
+        console.log("handleDoubleClick", e.target);
         e.target.contentEditable = true;
         e.preventDefault();
     }
-    
+
     handleSubmit(e, id, title) {
         if (e.which === 13) {
             this.props.onEditTitle(e.currentTarget.innerText, id);
             e.target.contentEditable = false;
         }
-        if(e.which === 27){
+        if (e.which === 27) {
             e.currentTarget.innerText = title;
             e.target.contentEditable = false;
         }
     }
 
+    onTitleChange(event, id) {
+        //this.setState({html: event.target.value});
+        this.props.onEditTitle(event.target.value, id);
+    }
+
     render() {
         let { title, list, id } = this.props.data, taskGroupIndex = this.props.index, completeness;
+        console.log("render");
 
         let listElements = list
             .filter(listItem => listItem.name.toLowerCase().indexOf(this.props.filterBy) > -1)
@@ -76,14 +84,17 @@ export default class TaskGroup extends React.Component {
 
         return <div className="to-do__task-group active fleft">
             <div className="to-do__task-group__close">
-                <div className="to-do__task-group__close__ico" onClick={() => this.props.onDelete(id)}>+</div>
+                <div className="to-do__task-group__close__ico"
+                     onClick={() => this.props.onDelete(id)}>
+                    +
+                </div>
             </div>
             <div className="to-do__task-group__header">
-                 <span className="bold-text" id={'title'+id} 
-                      onDoubleClick={(event) => this.handleDoubleClick(event)}
-                      onKeyDown={(event) => this.handleSubmit(event, id, title)}>
-                {title}</span>
-                <span className="to-do__task-group__header__perc">({completeness||''}%)</span>
+                 <ContentEditable className="bold-text" id={'title'+id}
+                                  onChange={(event) => this.onTitleChange(event, id)} tag="span" html={title}>
+
+                 </ContentEditable>
+                <span className="to-do__task-group__header__perc">({completeness || ''}%)</span>
             </div>
             <div className="to-do__task-group__progress-bar">
                 <div className="to-do__task-group__progress-bar--perc-completed"
@@ -95,7 +106,8 @@ export default class TaskGroup extends React.Component {
                 </ul>
             </div>
             <div className="to-do__task-group__add-new-wrapper">
-                <input type="text" className="to-do-default-text-box" onKeyDown={(event) => this.onAddListItem(event, id)}/>
+                <input type="text" className="to-do-default-text-box"
+                       onKeyDown={(event) => this.onAddListItem(event, id)}/>
             </div>
         </div>
     }
