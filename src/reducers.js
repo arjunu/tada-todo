@@ -80,11 +80,10 @@ export function rootReducer(state = initialState, action) {
             };
 
         case 'CHECK_LISTITEM':
-            taskGroups[action.taskGroupIndex].list[action.listItemIndex] = Object.assign({}, {
-                id: taskGroups[action.taskGroupIndex].list[action.listItemIndex].id,
-                done: !taskGroups[action.taskGroupIndex].list[action.listItemIndex].done,
-                name: taskGroups[action.taskGroupIndex].list[action.listItemIndex].name
-            });
+            taskGroups[action.taskGroupIndex].list[action.listItemIndex] = {
+                ...taskGroups[action.taskGroupIndex].list,
+                done: !taskGroups[action.taskGroupIndex].list[action.listItemIndex].done
+            };
 
             return {
                 taskGroups: taskGroups,

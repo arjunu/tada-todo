@@ -41,8 +41,8 @@ class App extends Component {
                     onListItemEdit={actions.updateListItem}
                 />
             ));
-        console.log(taskGroupElements)
-        return <div className="to-do-wrapper">  
+
+        return <div className="to-do-wrapper">
             <h1 className="fleft">TADA TODO</h1>
             <SearchTask onSearch={actions.searchTask}/>
             <div className="to-do__task-group-wrapper clearall clearfix">
