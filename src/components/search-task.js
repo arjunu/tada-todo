@@ -17,6 +17,7 @@ export default class SearchTask extends React.Component {
 				<div className="to-do__search-box__input-wrapper fleft">
 					<input type="text" className="to-do-default-text-box" value={this.props.filterBy} 
                         placeholder="Search for tasks" onChange={this.handleSearch}/>
+                    <div className="to-do-default-text-box-clear cross-icon">+</div>    
 				</div>	
 			</div>
     }

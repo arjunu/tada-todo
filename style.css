@@ -69,6 +69,10 @@ li{
     padding: 25px;
 }
 
+.to-do__search-box__input-wrapper{
+    position:relative;    
+}
+
 .to-do-default-text-box{
     background: transparent;
     border: none;
@@ -76,6 +80,20 @@ li{
     padding: 5px 0px;
     outline:none;
     color: #6B6980;
+}
+
+.to-do-default-text-box-clear{
+    display: inline-block;
+    font-size: 28px;
+    transform: rotate(45deg);
+    position: absolute;
+    right: 3px;
+    cursor:pointer;
+    top: -3px;
+}
+
+.to-do-default-text-box-clear:hover{
+    color:black;
 }
 
 .to-do__search-box__input-wrapper .to-do-default-text-box{
