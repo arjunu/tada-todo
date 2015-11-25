@@ -40,15 +40,21 @@ function taskGroupListReducer(list = [], action) {
             }];
 
         case "REMOVE_LISTITEM":
-            return list.filter((item) => (item.id !== action.listItemIndex));
+            return list.filter((item) => (item.id !== action.listItemId));
 
         case "CHECK_LISTITEM":
-            return [...list.slice(0, action.listItemIndex),
-                {
-                    ...list[action.listItemIndex],
-                    done: !list[action.listItemIndex].done
-                },
-                ...list.slice(action.listItemIndex + 1)];
+            return list.map(item => {
+                if (item.id === action.listItemId)
+                    return {...item, done: !item.done};
+                return item;
+            });
+
+        case "UPDATE_LISTITEM":
+            return list.map(item => {
+                if (item.id === action.listItemId)
+                    return {...item, name: action.text};
+                return item;
+            });
 
         default:
             return list;
@@ -57,9 +63,6 @@ function taskGroupListReducer(list = [], action) {
 
 
 export function rootReducer(state = initialState, action) {
-    //todo remove this line
-    let taskGroups = [...state.taskGroups];
-
     switch (action.type) {
 
         case 'CREATE_TASKGROUP':
@@ -96,6 +99,7 @@ export function rootReducer(state = initialState, action) {
         case 'ADD_LISTITEM':
         case 'REMOVE_LISTITEM':
         case 'CHECK_LISTITEM':
+        case 'UPDATE_LISTITEM':
             return {
                 taskGroups: state.taskGroups.map(taskGroup => {
                     if (taskGroup.id === action.taskGroupId)
@@ -105,18 +109,6 @@ export function rootReducer(state = initialState, action) {
                         };
                     else  return taskGroup;
                 }),
-                searchText: state.searchText
-            };
-
-        case 'UPDATE_LISTITEM':
-            taskGroups[action.taskGroupIndex].list[action.listItemIndex] = Object.assign({}, {
-                id: taskGroups[action.taskGroupIndex].list[action.listItemIndex].id,
-                done: taskGroups[action.taskGroupIndex].list[action.listItemIndex].done,
-                name: action.text
-            });
-
-            return {
-                taskGroups: taskGroups,
                 searchText: state.searchText
             };
 

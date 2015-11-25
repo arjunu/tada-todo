@@ -16,16 +16,16 @@ export default {
         return { type: 'ADD_LISTITEM', text, taskGroupId};
     },
     
-    removeListItem(taskGroupId, listItemIndex){
-        return { type: 'REMOVE_LISTITEM', taskGroupId, listItemIndex};
+    removeListItem(taskGroupId, listItemId){
+        return { type: 'REMOVE_LISTITEM', taskGroupId, listItemId};
     },
     
-    checkListItem(taskGroupId, listItemIndex){
-        return { type: 'CHECK_LISTITEM', taskGroupId, listItemIndex};
+    checkListItem(taskGroupId, listItemId){
+        return { type: 'CHECK_LISTITEM', taskGroupId, listItemId};
     },
     
-    updateListItem(text, taskGroupIndex, listItemIndex){
-        return { type: 'UPDATE_LISTITEM', text, taskGroupIndex, listItemIndex};
+    updateListItem(text, taskGroupId, listItemId){
+        return { type: 'UPDATE_LISTITEM', text, taskGroupId, listItemId};
     },
     
     searchTask(text){
