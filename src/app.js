@@ -23,7 +23,7 @@ class App extends Component {
         let filteredGroup = [];
         if(searchText) {
             filteredGroup = taskGroups.toJS()
-        .filter(taskGroup => taskGroup.list.toJS().filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length);
+        .filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length);
         } else {
             filteredGroup = taskGroups.toJS();
         }
