@@ -45,10 +45,6 @@ export default class TaskGroup extends React.Component {
         }
     }
 
-    onTitleChange(event, id) {
-        //this.setState({html: event.target.value});
-        this.props.onEditTitle(event.target.value, id);
-    }
 
     render() {
         let { title, list, id } = this.props.data, taskGroupIndex = this.props.index, completeness;
@@ -91,7 +87,8 @@ export default class TaskGroup extends React.Component {
             </div>
             <div className="to-do__task-group__header">
                  <ContentEditable className="bold-text" id={'title'+id}
-                                  onChange={(event) => this.onTitleChange(event, id)}
+                                  onKeyPress={(event) => this.handleSubmit(event, id, title)}
+                                  onDoubleClick={(event) => this.handleDoubleClick(event)}
                                   tag="span"
                                   html={title}>
 

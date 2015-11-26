@@ -18,13 +18,14 @@ class App extends Component {
     render() {
         console.log("app props", this.props);
         let {data, actions} = this.props;
-        let {taskGroups, searchText} = data;
+        let taskGroups = data.get('taskGroups');
+        let searchText = data.get('searchText');
         let filteredGroup = [];
         if(searchText) {
-            filteredGroup = taskGroups
-        .filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length);
+            filteredGroup = taskGroups.toJS()
+        .filter(taskGroup => taskGroup.list.toJS().filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length);
         } else {
-            filteredGroup = taskGroups;
+            filteredGroup = taskGroups.toJS();
         }
         let taskGroupElements = filteredGroup
             .map((taskGroup, index) => (
