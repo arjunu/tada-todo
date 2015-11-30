@@ -30,7 +30,6 @@ class App extends Component {
             .map((taskGroup, index) => (
                 <TaskGroup
                     key={taskGroup.id}
-                    index={index}
                     filterBy={searchText}
                     data={taskGroup}
                     onListItemCheck={actions.checkListItem}

@@ -16,8 +16,12 @@ export default class TaskGroup extends React.Component {
         }
     }
 
+    onFocus(){
+
+    }
+
     render() {
-        let { title, list, id } = this.props.data, taskGroupIndex = this.props.index, completeness;
+        let { title, list, id } = this.props.data, completeness;
         console.log("render");
 
         let listElements = list
@@ -53,7 +57,7 @@ export default class TaskGroup extends React.Component {
                 else return sum;
             }, 0) / list.length * 100);
 
-        return <div className="to-do__task-group active fleft">
+        return <div className="to-do__task-group fleft">
 
             <div className="to-do__task-group__close">
                 <div className="to-do__task-group__close__ico"
@@ -63,7 +67,7 @@ export default class TaskGroup extends React.Component {
             </div>
 
             <div className="to-do__task-group__header">
-                <ContentEditable className="bold-text" id={'title'+id}
+                <ContentEditable className="bold-text"
                                  onChange={(event) => {event.stopPropagation(); this.props.onEditTitle(event.target.value, id);}}
                                  tag="span"
                                  html={title}>
