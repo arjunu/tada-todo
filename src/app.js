@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodoActions from './actions';
 import TaskGroup from  './components/task-group';
-import SearchTask from './components/search-task';
+import SearchBox from './components/search-box';
 import AddButton from './components/add-button';
 
 class App extends Component {
@@ -43,7 +43,7 @@ class App extends Component {
 
         return <div className="to-do-wrapper">
             <h1 className="fleft">TADA TODO</h1>
-            <SearchTask onSearch={actions.searchTask}/>
+            <SearchBox onSearch={actions.searchTask} searchText={searchText}/>
             <div className="to-do__task-group-wrapper clearall clearfix">
                 {taskGroupElements}
                 <AddButton handleClick={actions.createTaskGroup}/>
