@@ -1,32 +1,31 @@
 import Immutable, { Map, List } from 'immutable';
 
-const initialState = Map({
-    taskGroups: List([
-    	Map({
-	        id: 0,
-	        title: "Shopping list",
-	        list: List([
-	            Map({id: 0, name: "Milk", done: false}),
-	            Map({id: 1, name: "Eggs", done: true}),
-	            Map({id: 2, name: "Bean bag", done: true})
-	        ])
-	    }),
-        Map({
+const initialState = Immutable.fromJS({
+    taskGroups: [{
+        id: 0,
+        title: "Shopping list",
+        list: [
+            {id: 0, name: "Milk", done: false},
+            {id: 1, name: "Eggs", done: true},
+            {id: 2, name: "Bean bag", done: true}
+        ]
+    },
+        {
             id: 1,
             title: "Hit list",
-            list: List([
-                Map({id: 0, name: "Vinoj", done: false}),
-                Map({id: 1, name: "Sandeep", done: true}),
-                Map({id: 2, name: "Amala", done: true}),
-                Map({id: 3, name: "Dixy", done: true}),
-                Map({id: 4, name: "Ajay", done: true}),
-                Map({id: 5, name: "Ashwin", done: true}),
-                Map({id: 6, name: "Yashin", done: true}),
-                Map({id: 7, name: "Mudassir", done: true}),
-                Map({id: 8, name: "Ishan", done: true})
-            ])
-        })
-    ]),
+            list: [
+                {id: 0, name: "Vinoj", done: false},
+                {id: 1, name: "Sandeep", done: true},
+                {id: 2, name: "Amala", done: true},
+                {id: 3, name: "Dixy", done: true},
+                {id: 4, name: "Ajay", done: true},
+                {id: 5, name: "Ashwin", done: true},
+                {id: 6, name: "Yashin", done: true},
+                {id: 7, name: "Mudassir", done: true},
+                {id: 8, name: "Ishan", done: true}
+            ]
+        }
+    ],
     searchText: ""
 });
 
@@ -62,22 +61,18 @@ function taskGroupListReducer(list = [], action) {
 export function rootReducer(state = initialState, action) {
     //todo remove this line
     let taskGroups = state.get('taskGroups');
+    
+    let immState = Immutable.fromJS(state);
 
     switch (action.type) {
 
         case 'CREATE_TASKGROUP':
-            return Map({
-                taskGroups: List([
-                    ...state.get('taskGroups'),
-                    Map({
+            return immState.updateIn(['taskGroups'], taskGroups => taskGroups.push({
                         id: taskGroups.toJS().reduce((maxId, taskGroup) => Math.max(taskGroup.id, maxId), -1) + 1,
                         title: 'New Task Group',
                         list: List()
-                    })
-                ]),
-                searchText: state.get('searchText')
-            });
-
+                    }));
+            
         case 'REMOVE_TASKGROUP':
             return Map({
                 taskGroups: List(state.get('taskGroups').toJS().filter(taskGroup => taskGroup.id !== action.taskGroupId)),
