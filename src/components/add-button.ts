@@ -1,5 +1,9 @@
 import React from 'react';
 
+interface AddButtonProps{
+    onClick : Function;
+}
+
 export default class AddButton extends React.Component {
     constructor(props, context) {
         super(props, context);
