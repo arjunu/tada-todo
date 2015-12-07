@@ -1,5 +1,5 @@
-import React from 'react';
-import ContentEditable from './content-editable';
+import * as React from "react";
+import ContentEditable from './content-editable.tsx';
 
 export default class TaskGroup extends React.Component {
     constructor(props, context) {

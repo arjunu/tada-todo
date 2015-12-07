@@ -1,6 +1,11 @@
-import React from 'react';
+/// <reference path="../typings/react/react.d.ts" />
+import React = __React;
 
-export default class SearchBox extends React.Component {
+interface SearchBoxProps{
+    
+}
+
+export default class SearchBox extends React.Component<SearchBoxProps, any>{
 
     constructor(props, context) {
         super(props, context);

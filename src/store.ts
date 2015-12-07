@@ -3,7 +3,7 @@ import { compose, createStore, applyMiddleware } from 'redux';
 // Redux DevTools store enhancers
 //import { devTools, persistState } from 'redux-devtools';
 
-import { rootReducer } from './reducers';
+import { rootReducer } from './reducers.ts';
 
 
 const finalCreateStore = compose(

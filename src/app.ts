@@ -1,13 +1,35 @@
-import React from 'react';
+/// <reference path="../typings/react/react.d.ts" />
+
+import React = __React;
 import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import TodoActions from './actions';
-import TaskGroup from  './components/task-group';
-import SearchBox from './components/search-box';
-import AddButton from './components/add-button';
+import TodoActions from './actions.ts';
+import TaskGroup from  './components/task-group.tsx';
+import SearchBox from './components/search-box.tsx';
+import AddButton from './components/add-button.tsx';
 
-class App extends Component {
+interface list{
+    id: number;
+    name: string;
+    done: boolean;
+}
+
+interface taskGroup  {  
+        taskGroups: [{
+            id: number,
+            title: string,
+            list: list[]
+        }],
+        searchText: string
+};
+
+interface AppProps{
+    data : taskGroup;
+    actions:    
+};
+
+class App extends Component <AppProps, any> {
     constructor() {
       super();
       this.createTaskGroup = this.createTaskGroup.bind(this);
@@ -16,7 +38,6 @@ class App extends Component {
         
     }
     render() {
-        console.log("app props", this.props);
         let {data, actions} = this.props;
         let {taskGroups, searchText} = data;
         let filteredGroup = [];
