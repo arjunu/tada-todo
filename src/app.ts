@@ -10,23 +10,7 @@ import TodoActions from './actions.ts';
 import TaskGroup from  './components/task-group.tsx';
 import SearchBox from './components/search-box.tsx';
 import AddButton from './components/add-button.tsx';
-
-interface list {
-    id: number;
-    name: string;
-    done: boolean;
-}
-
-interface taskGroup {
-    id: number;
-    title: string;
-    list: list[];
-};
-
-interface taskGroups {
-    taskGroups: taskGroup;
-    searchText: string;
-};
+import {list, taskGroup, taskGroups} from './models/taskgroup.ts'
 
 interface AppProps {
     data: taskGroups;
