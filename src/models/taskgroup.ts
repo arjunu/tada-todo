@@ -4,13 +4,13 @@ export type List = {
     done: boolean;
 };
 
-export type taskGroup = {
+export type Task = {
     id: number;
     title: string;
     list: List[];
 };
 
 export type TaskGroups = {
-    taskGroups: taskGroup[];
+    taskGroups: Task[];
     searchText: string;
 };

@@ -3,19 +3,20 @@
 /// <reference path="../typings/react-redux/react-redux.d.ts" />
 
 import * as React from 'react';
-import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodoActions from './actions.ts';
 import TaskGroup from  './components/task-group.tsx';
 import SearchBox from './components/search-box.tsx';
 import AddButton from './components/add-button.tsx';
-import {List, taskGroup, TaskGroups} from './models/taskgroup.ts'
+import {List, Task, TaskGroups} from './models/taskgroup.ts'
+import {ActionType} from './models/actiontype.ts'
 
 interface AppProps {
     data: TaskGroups;
-    actions: TodoActions;
+    actions: ActionType;
 };
+
 
 class App extends React.Component<AppProps, any> {
     constructor() {
@@ -24,11 +25,12 @@ class App extends React.Component<AppProps, any> {
    
     render() {
         let {data, actions} = this.props;
-        let {taskGroups, searchText} = data;
+        let {taskGroups , searchText} = data;
         let filteredGroup = [];
         if (searchText) {
             filteredGroup = taskGroups
-                .filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1).length);
+            .filter((taskGroup) => taskGroup.list
+            .filter(task => task.name.toLowerCase().indexOf(searchText) > -1).length);
         } else {
             filteredGroup = taskGroups;
         }

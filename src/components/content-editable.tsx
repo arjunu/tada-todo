@@ -4,13 +4,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom'
 
 
-interface ContentEditableProps{
+interface ContentEditableProps {
     onChange: Function;
     onClick?: Function;
     tag: string;
     id?: string;
     html: string;
-    className? : string;
+    className?: string;
 }
 
 export default class ContentEditable extends React.Component<ContentEditableProps, any> {

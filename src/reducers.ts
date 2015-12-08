@@ -1,4 +1,4 @@
-import {List, taskGroup, TaskGroups} from './models/taskgroup.ts';
+import {List, Task, TaskGroups} from './models/taskgroup.ts';
 import {ActionType} from './models/actiontype.ts';
 
 const initialState = {
@@ -30,7 +30,7 @@ const initialState = {
     searchText: ""
 };
 
-function taskGroupListReducer<List>(list :List[] , action: ActionType) {
+function taskGroupListReducer<List>(list : List[], action: ActionType) {
     switch (action.type) {
 
         case "ADD_LISTITEM":
