@@ -36,7 +36,6 @@ interface AppProps {
 class App extends React.Component<AppProps, any> {
     constructor() {
         super();
-        this.createTaskGroup = this.createTaskGroup.bind(this);
     }
    
     render() {
