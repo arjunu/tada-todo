@@ -1,16 +1,16 @@
-export type list = {
+export type List = {
     id: number;
     name: string;
     done: boolean;
-}
+};
 
 export type taskGroup = {
     id: number;
     title: string;
-    list: list[];
-}
+    list: List[];
+};
 
-export type taskGroups = {
-    taskGroups: taskGroup;
+export type TaskGroups = {
+    taskGroups: taskGroup[];
     searchText: string;
-}
+};

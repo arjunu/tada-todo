@@ -10,10 +10,10 @@ import TodoActions from './actions.ts';
 import TaskGroup from  './components/task-group.tsx';
 import SearchBox from './components/search-box.tsx';
 import AddButton from './components/add-button.tsx';
-import {list, taskGroup, taskGroups} from './models/taskgroup.ts'
+import {List, taskGroup, TaskGroups} from './models/taskgroup.ts'
 
 interface AppProps {
-    data: taskGroups;
+    data: TaskGroups;
     actions: TodoActions;
 };
 
