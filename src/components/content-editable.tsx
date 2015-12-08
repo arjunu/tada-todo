@@ -1,14 +1,16 @@
 /// <reference path="../../typings/react/react.d.ts" />
-import React = __React;
-import ReactDOM = __React;
+/// <reference path="../../typings/react/react-dom.d.ts" />
+import * as React from 'react';
+import * as ReactDOM from 'react-dom'
 
 
-interface ContentEditableProps extends React.Props<any> {
+interface ContentEditableProps{
     onChange: Function;
     onClick: Function;
     tag: string;
     id: string;
     html: string;
+    className? : string;
 }
 
 export default class ContentEditable extends React.Component<ContentEditableProps, any> {
@@ -18,13 +20,13 @@ export default class ContentEditable extends React.Component<ContentEditableProp
     }
 
     render() {
-        return <this.props.tag
+        return < this.props.tag
             {...this.props}
             onInput={this.emitChange}
             onBlur={this.emitChange}
             contentEditable="true"
             dangerouslySetInnerHTML={{ __html: this.props.html }}>
-            </this.props.tag>;
+            </ this.props.tag >;
     }
 
     shouldComponentUpdate(nextProps) {

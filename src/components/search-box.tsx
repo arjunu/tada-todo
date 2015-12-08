@@ -1,8 +1,9 @@
-/// <reference path="../typings/react/react.d.ts" />
-import React = __React;
+/// <reference path="../../typings/react/react.d.ts" />
+import * as React from 'react';
 
 interface SearchBoxProps{
-    
+    onSearch : Function;
+    searchText: string
 }
 
 export default class SearchBox extends React.Component<SearchBoxProps, any>{
