@@ -1,3 +1,6 @@
+import {List, taskGroup, TaskGroups} from './models/taskgroup.ts';
+import {ActionType} from './models/actiontype.ts';
+
 const initialState = {
     taskGroups: [{
         id: 0,
@@ -27,8 +30,7 @@ const initialState = {
     searchText: ""
 };
 
-
-function taskGroupListReducer(list = [], action) {
+function taskGroupListReducer<List>(list :List[] , action: ActionType) {
     switch (action.type) {
 
         case "ADD_LISTITEM":
@@ -62,7 +64,7 @@ function taskGroupListReducer(list = [], action) {
 }
 
 
-export function rootReducer(state = initialState, action) {
+export function rootReducer<TaskGroups>(state : TaskGroups =  initialState, action : ActionType) {
     switch (action.type) {
 
         case 'CREATE_TASKGROUP':
@@ -70,7 +72,7 @@ export function rootReducer(state = initialState, action) {
                 taskGroups: [
                     ...state.taskGroups,
                     {
-                        id: taskGroups.reduce((maxId, taskGroup) => Math.max(taskGroup.id, maxId), -1) + 1,
+                        id: state.taskGroups.reduce((maxId, taskGroup) => Math.max(taskGroup.id, maxId), -1) + 1,
                         title: 'New Task Group',
                         list: []
                     }
@@ -86,7 +88,8 @@ export function rootReducer(state = initialState, action) {
 
         case 'EDIT_TITLE':
             return {
-                taskGroups: state.taskGroups.map(taskGroup => {
+                taskGroups: state.taskGroups.map(taskGroup => 
+                {
                     if (taskGroup.id === action.taskGroupId)
                         return {
                             ...taskGroup, title: action.text
@@ -95,10 +98,11 @@ export function rootReducer(state = initialState, action) {
                 }),
                 searchText: state.searchText
             };
-
+            
         case 'ADD_LISTITEM':
         case 'REMOVE_LISTITEM':
         case 'CHECK_LISTITEM':
+            
         case 'UPDATE_LISTITEM':
             return {
                 taskGroups: state.taskGroups.map(taskGroup => {

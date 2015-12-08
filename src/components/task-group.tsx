@@ -1,12 +1,21 @@
-import React from 'react';
-import ContentEditable from './content-editable';
+import * as React from "react";
+import ContentEditable from './content-editable.tsx';
 
-export default class TaskGroup extends React.Component {
+interface TaskGroupProps {
+    onListItemDelete: Function,
+    onListItemCheck: Function,
+    onListItemEdit: Function,
+    onListItemAdd: Function,
+    onEditTitle: Function,
+    index: Number,
+    filterBy: String,
+    data: TaskGroup,
+    onDelete: Function
+}
+
+export default class TaskGroup extends React.Component<TaskGroupProps, any> {
     constructor(props, context) {
         super(props, context);
-        this.onListItemDelete = this.props.onListItemDelete;
-        this.onListItemCheck = this.props.onListItemCheck;
-        this.onListItemEdit = this.props.onListItemEdit;
     }
 
     onAddListItem(event, taskGroupId) {
@@ -16,27 +25,21 @@ export default class TaskGroup extends React.Component {
         }
     }
 
-    onFocus(){
-
-    }
-
     render() {
         let { title, list, id } = this.props.data, completeness;
-        console.log("render");
-
         let listElements = list
             .filter(listItem => listItem.name.toLowerCase().indexOf(this.props.filterBy) > -1)
             .map((listItem, index) => (
                 <li
                     key={listItem.id}
                     className="to-do__task-group__task-list__item clearfix"
-                    onClick={(event) => { event.stopPropagation(); this.onListItemCheck(id, listItem.id); }}>
+                    onClick={(event) => { event.stopPropagation(); this.props.onListItemCheck(id, listItem.id); }}>
                     <span className="fleft">
 
                         <input type="checkbox" checked={listItem.done}/>
 
                         <ContentEditable className="to-do__task-group__task-list__item__name user-select-enabled"
-                                         onChange={(event) => {this.onListItemEdit(event.target.value, id, listItem.id);}}
+                                         onChange={(event) => {this.props.onListItemEdit(event.target.value, id, listItem.id);}}
                                          onClick={(event) => (event.stopPropagation())}
                                          tag="span"
                                          id={listItem.id + index + listItem.name}
@@ -46,7 +49,7 @@ export default class TaskGroup extends React.Component {
 
                     <div
                         className="to-do__task-group__task-list__item__delete fright"
-                        onClick={(event) => { event.stopPropagation(); this.onListItemDelete(id, listItem.id); }}>
+                        onClick={(event) => { event.stopPropagation(); this.props.onListItemDelete(id, listItem.id); }}>
                         <span className="to-do__task-group__task-list__item__delete__ico">+</span>
                     </div>
                 </li>
