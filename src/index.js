@@ -9,13 +9,12 @@ import App from './app';
 const store = configureStore();
 
 const rootElement = document.getElementById('root');
-console.log("script", Provider, store);
 
 render(
-<div>
-<Provider store={store}>
-    <App></App>
-    </Provider>
+    <div>
+        <Provider store={store}>
+            <App/>
+        </Provider>
     </div>,
     rootElement
 );

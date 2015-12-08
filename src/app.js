@@ -3,30 +3,57 @@ import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodoActions from './actions';
-import TaskGroup from './Components/TaskGroup';
-import SearchTask from './Components/SearchTask';
-import AddButton from './Components/AddButton';
+import TaskGroup from  './components/task-group';
+import SearchBox from './components/search-box';
+import AddButton from './components/add-button';
 
 class App extends Component {
-    render() {
-        const { taskGroupArray } = this.props;
+    constructor() {
+      super();
+      this.createTaskGroup = this.createTaskGroup.bind(this);
+    }
+    createTaskGroup(){
         
-        return <div>
-            <h1>Tada ToDo</h1>
-            <SearchTask/>
-            <div>
-                taskGroupArray.map( (taskGroup, index) => (
-                    <TaskGroup/>                   
-                    )
-                );
+    }
+    render() {
+        console.log("app props", this.props);
+        let {data, actions} = this.props;
+        let {taskGroups, searchText} = data;
+        let filteredGroup = [];
+        if(searchText) {
+            filteredGroup = taskGroups
+        .filter(taskGroup => taskGroup.list.filter(task => task.name.toLowerCase().indexOf(searchText) > -1 ).length);
+        } else {
+            filteredGroup = taskGroups;
+        }
+        let taskGroupElements = filteredGroup
+            .map((taskGroup, index) => (
+                <TaskGroup
+                    key={taskGroup.id}
+                    filterBy={searchText}
+                    data={taskGroup}
+                    onListItemCheck={actions.checkListItem}
+                    onListItemDelete={actions.removeListItem}
+                    onListItemAdd={actions.addListItem}
+                    onDelete={actions.removeTaskGroup}
+                    onEditTitle={actions.editTitle}
+                    onListItemEdit={actions.updateListItem}
+                />
+            ));
+
+        return <div className="to-do-wrapper">
+            <h1 className="fleft">TADA TODO</h1>
+            <SearchBox onSearch={actions.searchTask} searchText={searchText}/>
+            <div className="to-do__task-group-wrapper clearall clearfix">
+                {taskGroupElements}
+                <AddButton handleClick={actions.createTaskGroup}/>
             </div>
-            <AddButton/>
         </div>
     }
 }
 
 function mapStateToProps(state) {
-    return {todos: state};
+    return {data: state};
 }
 
 function mapDispatchToProps(dispatch) {
