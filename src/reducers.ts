@@ -97,6 +97,10 @@ export function rootReducer(state = initialState, action) {
                 searchText: state.searchText
             };
             
+        case 'ADD_LISTITEM':
+        case 'REMOVE_LISTITEM':
+        case 'CHECK_LISTITEM':
+            
         case 'UPDATE_LISTITEM':
             return {
                 taskGroups: state.taskGroups.map(taskGroup => {

@@ -6,9 +6,9 @@ import * as ReactDOM from 'react-dom'
 
 interface ContentEditableProps{
     onChange: Function;
-    onClick: Function;
+    onClick?: Function;
     tag: string;
-    id: string;
+    id?: string;
     html: string;
     className? : string;
 }
