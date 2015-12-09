@@ -47,7 +47,7 @@ function taskGroupListReducer<List>(list : List[], action: ActionType) {
         case "CHECK_LISTITEM":
             return list.map(item => {
                 if (item.id === action.listItemId)
-                    return {...item, done: !item.done};
+                    return {...item, done : !item.done};
                 return item;
             });
 
