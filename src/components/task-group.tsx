@@ -2,18 +2,18 @@ import * as React from "react";
 import ContentEditable from './content-editable.tsx';
 import {Task} from '../models/taskgroup.ts'
 
-interface TaskGroupProps {
+interface TaskGroupProps {    
+    index?: number;
+    filterBy: string;
+    data: Task;
+    onDelete: Function;
+    key : number;
     onListItemDelete: Function;
     onListItemCheck: Function;
     onListItemEdit: Function;
     onListItemAdd: Function;
     onEditTitle: Function;
-    index: number;
-    filterBy: string;
-    data: Task;
-    onDelete: Function;
-    key : number;
-}
+};
 
 export default class TaskGroup extends React.Component<TaskGroupProps, any> {
     constructor(props, context) {

@@ -17,46 +17,45 @@ interface AppProps {
     actions: ActionType;
 };
 
-
 class App extends React.Component<AppProps, any> {
     constructor() {
         super();
     }
-   
+
     render() {
         let {data, actions} = this.props;
-        let {taskGroups , searchText} = data;
+        let {taskGroups, searchText} = data;
         let filteredGroup = [];
         if (searchText) {
             filteredGroup = taskGroups
-            .filter((taskGroup) => taskGroup.list
-            .filter(task => task.name.toLowerCase().indexOf(searchText) > -1).length);
+                .filter((taskGroup) => taskGroup.list
+                    .filter(task => task.name.toLowerCase().indexOf(searchText) > -1).length > 0);
         } else {
             filteredGroup = taskGroups;
         }
         let taskGroupElements = filteredGroup
             .map((taskGroup, index) => (
                 <TaskGroup
-                    key={ taskGroup.id }
-                    filterBy= { searchText }
-                    data= { taskGroup }
-                    onListItemCheck= { actions.checkListItem }
-                    onListItemDelete= { actions.removeListItem }
-                    onListItemAdd= { actions.addListItem }
-                    onDelete= { actions.removeTaskGroup }
-                    onEditTitle= { actions.editTitle }
-                    onListItemEdit= { actions.updateListItem }
-            />
+                    key = { taskGroup.id }
+                    filterBy = { searchText }
+                    data = { taskGroup }
+                    onListItemCheck = { actions.checkListItem }
+                    onListItemDelete = { actions.removeListItem }
+                    onListItemAdd = { actions.addListItem }
+                    onDelete = { actions.removeTaskGroup }
+                    onEditTitle = { actions.editTitle }
+                    onListItemEdit = { actions.updateListItem }
+                    />
             ));
 
         return <div className="to-do-wrapper" >
-        <h1 className="fleft" > TADA TODO< /h1>
-        < SearchBox onSearch= { actions.searchTask } searchText= { searchText } />
-        <div className="to-do__task-group-wrapper clearall clearfix" >
-        { taskGroupElements }
-        < AddButton handleClick= { actions.createTaskGroup } />
-        </div>
-        < /div>
+                    <h1 className="fleft" > TADA TODO </h1>
+                    <SearchBox onSearch= {actions.searchTask} searchText= { searchText } />
+                    <div className="to-do__task-group-wrapper clearall clearfix" >
+                        {taskGroupElements}
+                        <AddButton handleClick = {actions.createTaskGroup} />
+                        </div>
+            </div>
     }
 }
 
