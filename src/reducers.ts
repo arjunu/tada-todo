@@ -1,7 +1,10 @@
-import {List, Task, TaskGroups} from './models/taskgroup.ts';
-import {ActionType} from './models/actiontype.ts';
+/// <reference path="../typings/underscore/underscore.d.ts" />
 
-const initialState = {
+import {List, Task, TaskGroups} from './models/taskgroup.ts';
+import {ActionReturnType} from './models/actiontype.ts';
+import {_} from 'underscore';
+
+const initialState: TaskGroups = {
     taskGroups: [{
         id: 0,
         title: "Shopping list",
@@ -30,7 +33,7 @@ const initialState = {
     searchText: ""
 };
 
-function taskGroupListReducer<List>(list : List[], action: ActionType) {
+function taskGroupListReducer(list:List[], action:ActionReturnType):List[] {
     switch (action.type) {
 
         case "ADD_LISTITEM":
@@ -46,15 +49,21 @@ function taskGroupListReducer<List>(list : List[], action: ActionType) {
 
         case "CHECK_LISTITEM":
             return list.map(item => {
-                if (item.id === action.listItemId)
-                    return {...item, done : !item.done};
+                if (item.id === action.listItemId){
+                    let newItem = _.clone(item);
+                    newItem.done = !newItem.done;
+                    return newItem;
+                }
                 return item;
             });
 
         case "UPDATE_LISTITEM":
             return list.map(item => {
-                if (item.id === action.listItemId)
-                    return {...item, name: action.text};
+                if (item.id === action.listItemId){
+                    let newItem = _.clone(item);
+                    newItem.name = action.text;
+                    return newItem;
+                }
                 return item;
             });
 
@@ -64,7 +73,7 @@ function taskGroupListReducer<List>(list : List[], action: ActionType) {
 }
 
 
-export function rootReducer<TaskGroups>(state : TaskGroups =  initialState, action : ActionType) {
+export function rootReducer(state:TaskGroups = initialState, action:ActionReturnType):TaskGroups {
     switch (action.type) {
 
         case 'CREATE_TASKGROUP':
@@ -88,29 +97,29 @@ export function rootReducer<TaskGroups>(state : TaskGroups =  initialState, acti
 
         case 'EDIT_TITLE':
             return {
-                taskGroups: state.taskGroups.map(taskGroup => 
-                {
-                    if (taskGroup.id === action.taskGroupId)
-                        return {
-                            ...taskGroup, title: action.text
-                        };
+                taskGroups: state.taskGroups.map(taskGroup => {
+                    if (taskGroup.id === action.taskGroupId){
+                        let newtaskGroup = _.clone(taskGroup);
+                        newtaskGroup.title = action.text;
+                        return newtaskGroup;
+                    }
                     else  return taskGroup;
                 }),
                 searchText: state.searchText
             };
-            
+
         case 'ADD_LISTITEM':
         case 'REMOVE_LISTITEM':
         case 'CHECK_LISTITEM':
-            
+
         case 'UPDATE_LISTITEM':
             return {
                 taskGroups: state.taskGroups.map(taskGroup => {
-                    if (taskGroup.id === action.taskGroupId)
-                        return {
-                            ...taskGroup,
-                            list: taskGroupListReducer(taskGroup.list, action)
-                        };
+                    if (taskGroup.id === action.taskGroupId){
+                        let newtaskGroup = _.clone(taskGroup);
+                        newtaskGroup.list =taskGroupListReducer(taskGroup.list, action)
+                        return newtaskGroup;
+                    }
                     else  return taskGroup;
                 }),
                 searchText: state.searchText
